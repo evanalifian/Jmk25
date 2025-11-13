@@ -1,0 +1,22 @@
+{
+    "name": "asus/jmk25",
+    "description": "Sebuah aplikasi web untuk menampung meme.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "evanalifian",
+            "email": "evanalifian@gmal.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jmk25\\": "app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jmk25\\": "test"
+        }
+    },
+    "require": {}
+}

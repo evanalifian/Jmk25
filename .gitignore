@@ -1,0 +1,6 @@
+# Composer dependencies
+/vendor/
+composer.phar
+
+# IDE and OS-specific files
+.vscode/
