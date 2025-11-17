@@ -65,59 +65,60 @@ npm install
   <tr>
     <td align="center" valign="top">
       <a href="https://github.com/evanalifian">
-        <img src="https://github.com/evanalifian.png"
-          src="https://github.com/Roti18.png" 
-          width="100" 
-          height="100"
-          style="border-radius:50%; object-fit:cover;"
-        />
-        <br><sub><b>Evan</b></sub>
+         <div style="width:100px; height:100px; overflow:hidden; border-radius:50%;">
+            <img src="https://github.com/evanalifian.png" 
+               width="100" 
+               height="100"
+               style="object-fit: cover;"/>
+            <br><sub><b>Evan</b></sub>
+         </div>
       </a>
     </td>
     <td align="center" valign="top">
       <a href="https://github.com/JayroFadil">
-        <img src="https://github.com/JayroFadil.png"
-          src="https://github.com/Roti18.png" 
-          width="100" 
-          height="100"
-          style="border-radius:50%; object-fit:cover;"
-        />
-        <br><sub><b>Fadil</b></sub>
+         <div style="width:100px; height:100px; overflow:hidden; border-radius:50%;">
+            <img src="https://github.com/JayroFadil.png" 
+               width="100" 
+               height="100"
+               style="object-fit: cover;"/>
+            <br><sub><b>Fadil</b></sub>
+         </div>
       </a>
     </td>
     <td align="center" valign="top">
       <a href="https://github.com/Roti18">
-        <img src="https://github.com/Roti18.png"
-          src="https://github.com/Roti18.png" 
-          width="100" 
-          height="100"
-          style="border-radius:50%; object-fit:cover;"
-        />
-        <br><sub><b>Roni</b></sub>
+         <div style="width:100px; height:100px; overflow:hidden; border-radius:50%;">
+            <img src="https://github.com/Roti18.png" 
+               width="100" 
+               height="100"
+               style="object-fit: cover;"/>
+            <br><sub><b>Roni</b></sub>
+         </div>
       </a>
     </td>
     <td align="center" valign="top">
       <a href="https://github.com/lailatulhasanah0304">
-        <img src="https://github.com/lailatulhasanah0304.png"
-          src="https://github.com/Roti18.png" 
-          width="100" 
-          height="100"
-          style="border-radius:50%; object-fit:cover;"
-        />
-        <br><sub><b>Laila</b></sub>
+         <div style="width:100px; height:100px; overflow:hidden; border-radius:50%;">
+            <img src="https://github.com/lailatulhasanah0304.png" 
+               width="100" 
+               height="100"
+               style="object-fit: cover;"/>
+            <br><sub><b>Laila</b></sub>
+         </div>
       </a>
     </td>
     <td align="center" valign="top">
       <a href="https://github.com/RobbaniyahUmdatunN1">
-        <img src="https://github.com/RobbaniyahUmdatunN1.png"
-          src="https://github.com/Roti18.png" 
-          width="100" 
-          height="100"
-          style="border-radius:50%; object-fit:cover;"
-        />
-        <br><sub><b>Nia</b></sub>
+         <div style="width:100px; height:100px; overflow:hidden; border-radius:50%;">
+            <img src="https://github.com/RobbaniyahUmdatunN1.png" 
+               width="100" 
+               height="100"
+               style="object-fit: cover;"/>
+            <br><sub><b>Nia</b></sub>
+         </div>
       </a>
     </td>
   </tr>
 </table>
+
 </div>
