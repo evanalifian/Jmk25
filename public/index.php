@@ -18,8 +18,8 @@ use Jmk25\Controllers\UserController;
 
 
 // User path routes
-Router::add("GET", "/signin", UserController::class, "renderSignin");
-Router::add("GET", "/signup", UserController::class, "renderSignup");
+Router::add("GET", "/user/signin", UserController::class, "renderSignin");
+Router::add("GET", "/user/signup", UserController::class, "renderSignup");
 
 
 // Landing page route
