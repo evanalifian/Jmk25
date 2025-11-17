@@ -59,42 +59,44 @@ npm install
 
 ## Tim Pengembang
 
-<table border="0" cellpadding="0" cellspacing="0" style="display: flex; justify-content: center; gap: 20px; text-align: center;">
-  <tr>
-    <td align="center" valign="top">
-      <a href="https://github.com/evanalifian">
-        <img src="https://github.com/evanalifian.png" width="100" style="border-radius: 50%;" alt="Evan"/>
-        <br />
-        <sub><b>Evan</b></sub>
-      </a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://github.com/JayroFadil">
-        <img src="https://github.com/JayroFadil.png" width="100" style="border-radius: 50%;" alt="Fadil"/>
-        <br />
-        <sub><b>Fadil</b></sub>
-      </a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://github.com/Roti18">
-        <img src="https://github.com/Roti18.png" width="100" style="border-radius: 50%;" alt="Roni"/>
-        <br />
-        <sub><b>Roni</b></sub>
-      </a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://github.com/lailatulhasanah0304">
-        <img src="https://github.com/lailatulhasanah0304.png" width="100" style="border-radius: 50%;" alt="Laila"/>
-        <br />
-        <sub><b>Laila</b></sub>
-      </a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://github.com/RobbaniyahUmdatunN1">
-        <img src="https://github.com/RobbaniyahUmdatunN1.png" width="100" style="border-radius: 50%;" alt="Nia"/>
-        <br />
-        <sub><b>Nia</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
+<div style="display: flex; justify-content: center; gap: 20px; text-align: center;">
+   <table border="0" cellpadding="0" cellspacing="0" >
+      <tr>
+         <td align="center" valign="top">
+            <a href="https://github.com/evanalifian">
+            <img src="https://github.com/evanalifian.png" width="100" style="border-radius: 50%;" alt="Evan"/>
+            <br />
+            <sub><b>Evan</b></sub>
+            </a>
+         </td>
+         <td align="center" valign="top">
+            <a href="https://github.com/JayroFadil">
+            <img src="https://github.com/JayroFadil.png" width="100" style="border-radius: 50%;" alt="Fadil"/>
+            <br />
+            <sub><b>Fadil</b></sub>
+            </a>
+         </td>
+         <td align="center" valign="top">
+            <a href="https://github.com/Roti18">
+            <img src="https://github.com/Roti18.png" width="100" style="border-radius: 50%;" alt="Roni"/>
+            <br />
+            <sub><b>Roni</b></sub>
+            </a>
+         </td>
+         <td align="center" valign="top">
+            <a href="https://github.com/lailatulhasanah0304">
+            <img src="https://github.com/lailatulhasanah0304.png" width="100" style="border-radius: 50%;" alt="Laila"/>
+            <br />
+            <sub><b>Laila</b></sub>
+            </a>
+         </td>
+         <td align="center" valign="top">
+            <a href="https://github.com/RobbaniyahUmdatunN1">
+            <img src="https://github.com/RobbaniyahUmdatunN1.png" width="100" style="border-radius: 50%;" alt="Nia"/>
+            <br />
+            <sub><b>Nia</b></sub>
+            </a>
+         </td>
+      </tr>
+   </table>
+</div>
