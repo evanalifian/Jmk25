@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+@layer base {
+  :root {
+    --mainBg: #f8fafc;
+    --secondBg: #e2e8f0;
+    --mainText: #0f172a;
+    --mainGray: #94a3b8;
+    --accent: #3b82f6;
+  }
+  .dark {
+    --mainBg: #000000;
+    --secondBg: #181818;
+    --mainText: #fafafa;
+    --mainGray: #4d4d4d;
+    --accent: #0095f6;
+  }
+}
+
+/* @layer base {
+  :root {
+    --mainBg: #f8f8f2;
+    --secondBg: #e2e4e9;
+    --mainText: #282a36;
+    --mainGray: #bd93f9;
+    --accent: #ff79c6;
+  }
+
+  .dark {
+    --mainBg: #282a36;
+    --secondBg: #44475a;
+    --mainText: #f8f8f2;
+    --mainGray: #6272a4;
+    --accent: #ff79c6;
+  }
+} */
+/* @layer base {
+  :root {
+    --mainBg: #f8fafc;
+    --secondBg: #e2e8f0;
+    --mainText: #0f172a;
+    --mainGray: #94a3b8;
+    --accent: #3b82f6;
+  }
+
+  .dark {
+    --mainBg: #0f172a;
+    --secondBg: #1e293b;
+    --mainText: #f1f5f9;
+    --mainGray: #334155;
+    --accent: #60a5fa;
+  }
+} */
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
