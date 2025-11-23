@@ -19,7 +19,8 @@
       </ion-icon>
     </a>
 
-    <a href="/add" id="nav-add" data-icon="add-circle" class="sidebar-icon group p-3 duration-300 transition-colors">
+    <a href="/create" id="nav-add" data-icon="add-circle"
+      class="sidebar-icon group p-3 duration-300 transition-colors">
       <ion-icon name="add-circle-outline"
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>

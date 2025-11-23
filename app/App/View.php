@@ -12,6 +12,13 @@ class View {
     require_once __DIR__ . "/../Views/pages/" . $view . ".php";
     require_once __DIR__ . "/../Views/template/footer.php";
   }
+
+  public static function redirect(string $path) {
+    header("Location: $path");
+    exit;
+  }
+
+
   public static function renderLanding(string $view, $model = []): void {
     require_once __DIR__ . "/../Views/template/landing/header.php";
     require_once __DIR__ . "/../Views/pages/" . $view . ".php";

@@ -2,12 +2,12 @@
 
 namespace Jmk25\Middlewares;
 
-class AuthMiddleware {
-  public static function userAuth() {
+class IsNotAuthMiddleware implements Middleware {
+  function before(): void {
     session_start();
 
     if (!isset($_SESSION["login"])) {
-      header("Location: /signin");
+      header("Location: /user/signin");
       exit;
     }
   }

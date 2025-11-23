@@ -47,7 +47,8 @@ class Router {
         $function = $route["function"];
 
         foreach ($route["middlewares"] as $middleware) {
-          $middleware::userAuth();
+          $instance = new $middleware;
+          $instance->before();
         }
 
         array_shift($variables);
