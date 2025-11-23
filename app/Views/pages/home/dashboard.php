@@ -7,11 +7,8 @@
   <div class="flex-1 mt-2 bg-secondBg rounded-t-[2.5rem] relative shadow-[inner_0_10px_20px_rgba(0,0,0,0.05)] pb-10">
 
     <div class="pt-6 pb-20 flex flex-col">
-
-      <?php $memes = $model['data']['memes']; ?>
-
-      <?php if (is_array($memes) && count($memes) > 0): ?>
-      <?php foreach ($memes as $meme): ?>
+      <?php if ($model["data"]): ?>
+      <?php foreach ($model["data"] as $d): ?>
 
       <div class="flex flex-col p-5 border-b border-mainGray hover:bg-mainGray/5 transition-colors">
 
@@ -22,12 +19,12 @@
           <div class="flex flex-col leading-tight">
             <div class="flex items-center gap-1">
               <p class="font-bold text-mainText text-sm hover:underline cursor-pointer">
-                <?= htmlspecialchars($meme['author']); ?>
+                <?= htmlspecialchars($d['author']); ?>
               </p>
               <ion-icon name="checkmark-circle" class="text-blue-500 text-sm"></ion-icon>
             </div>
             <div class="flex items-center gap-1 text-xs text-gray-500">
-              <p>@<?= strtolower(htmlspecialchars($meme['author'])); ?></p>
+              <p>@<?= strtolower(htmlspecialchars($d['author'])); ?></p>
               <span class="text-[10px]">•</span>
               <p class="hover:underline cursor-pointer">2j</p>
             </div>
@@ -39,17 +36,17 @@
         </div>
 
         <p onclick="openComment(
-            '<?= $meme['id'] ?? rand(1,100) ?>', 
-            '<?= htmlspecialchars($meme['author']) ?>', 
-            `<?= htmlspecialchars($meme['title']) ?>`
+            '<?= $d['id'] ?? rand(1,100) ?>', 
+            '<?= htmlspecialchars($d['author']) ?>', 
+            `<?= htmlspecialchars($d['title']) ?>`
           )"
           class="text-mainText text-[15px] mb-3 leading-relaxed whitespace-pre-line cursor-pointer hover:opacity-75 transition-opacity">
-          <?= htmlspecialchars($meme['title']) ?>
+          <?= htmlspecialchars($d['title']) ?>
         </p>
 
         <div class="rounded-2xl overflow-hidden border border-mainGray bg-black/5">
-          <img src="<?= htmlspecialchars($meme['url']) ?>" alt="Meme"
-            onclick="openImageModal('<?= htmlspecialchars($meme['url']) ?>')"
+          <img src="<?= htmlspecialchars($d['url']) ?>" alt="Meme"
+            onclick="openImageModal('<?= htmlspecialchars($d['url']) ?>')"
             class="w-full h-auto max-h-[600px] object-contain hover:opacity-95 transition-opacity cursor-pointer">
         </div>
 
