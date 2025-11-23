@@ -3,7 +3,7 @@
             md:border-t-0 md:top-0 md:h-screen md:w-auto md:px-4 md:py-3 md:flex-col md:space-y-2">
 
   <a href="#" class="hidden md:block p-3 mb-2 opacity-80 hover:opacity-100 transition-opacity">
-    <img id="app-logo" class="w-10 h-8 object-contain" src="/assets/logowhite.png" alt="Logo">
+    <img id="app-logo" class="w-12 h-8 object-contain" src="/assets/logowhite.png" alt="Logo">
   </a>
 
   <div class="hidden md:block flex-grow"></div>
@@ -24,9 +24,9 @@
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>
 
-    <a href="/notifications" id="nav-notifications" data-icon="notifications"
+    <a href="/bookmark" id="nav-bookmark" data-icon="bookmark"
       class="sidebar-icon group p-3 duration-300 transition-colors">
-      <ion-icon name="notifications-outline" class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
+      <ion-icon name="boomark-outline" class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
@@ -40,12 +40,6 @@
   <div class="hidden md:block flex-grow"></div>
 
   <div class="hidden md:flex flex-col items-center space-y-2 mb-2">
-
-    <button class="theme-toggle-btn group p-3 cursor-pointer flex items-center justify-center transition-colors">
-      <ion-icon name="moon-outline"
-        class="text-3xl text-mainGray group-hover:text-mainText transition-transform duration-500 rotate-0">
-      </ion-icon>
-    </button>
 
     <a href="#" id="nav-filter" data-icon="filter" class="sidebar-icon group p-3 duration-300 transition-colors">
       <ion-icon name="filter-outline" class="text-3xl text-mainGray group-hover:text-mainText transition-colors">

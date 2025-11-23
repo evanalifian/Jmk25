@@ -17,10 +17,11 @@ public static function index(): void {
           "url" => "/",
           "active" => true],
         [ "text" => "Mengikuti", 
-          "url" => "/following"],
+          "url" => "/following",
+          "active" => false],
         [ "text" => "Grup", 
-          "url" => "/Grup"],
-          "active" => false 
+          "url" => "/Grup",
+          "active" => false],
       ],
       "hideSidebar" => false
     ];

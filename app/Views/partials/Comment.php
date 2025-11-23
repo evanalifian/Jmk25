@@ -83,7 +83,7 @@
 
       <div class="p-3 border-t border-gray-700 bg-mainBg shrink-0 flex flex-col gap-2">
 
-        <div id="replyingIndicator" class="hidden px-2 text-xs text-blue-400 flex justify-between items-center">
+        <div id="replyingIndicator" class="hidden px-2 text-xs text-blue-400 justify-between items-center">
           <span>Membalas ke <span id="replyingToUser" class="font-bold">@username</span></span>
           <button onclick="cancelReply()" class="text-gray-500 hover:text-white">
             <ion-icon name="close-circle"></ion-icon>

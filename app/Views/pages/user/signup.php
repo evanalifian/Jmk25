@@ -1,4 +1,4 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-mainBg min-h-screen">
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-mainBg">
 
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img id="app-logo" src="/assets/logowhite.png" alt="Jmk25 Logo" class="mx-auto h-12 w-auto object-contain" />
