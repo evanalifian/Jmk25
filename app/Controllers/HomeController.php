@@ -5,7 +5,7 @@ use Jmk25\App\View;
 
 class HomeController {
 public static function index(): void {
-    $response = @file_get_contents("https://meme-api.com/gimme/memes/10");
+    $response = @file_get_contents("https://meme-api.com/gimme/memes/20");
     $data = json_decode($response, true);
 
     $model = [

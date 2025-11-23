@@ -1,26 +1,9 @@
-<?php 
-    $model = [
-        'title' => 'Buat Postingan Baru',
-        'description' => 'Halaman untuk mengunggah foto atau video baru',
-        'menus' => [
-            [
-                'text' => 'Buat Postingan',
-                'url' => '#',
-                'active' => true
-            ]
-        ]
-    ];
-
-    include __DIR__ . '/../../template/header.php'; 
-    include __DIR__ . '/../../partials/MainHeader.php'; 
-    include __DIR__ . '/../../template/sidebar.php';
-?>
 
 <div class="min-h-screen bg-mainBg text-mainText pt-4 pb-24 md:pl-0">
     
     <div class="max-w-2xl mx-auto px-4">
         
-        <form action="/post/store" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="/store" method="POST" enctype="multipart/form-data" class="space-y-6">
             
             <div class="relative w-full">
                 <label class="block text-sm font-medium text-mainGray mb-2">Media</label>
@@ -94,51 +77,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    const dropArea = document.getElementById('drop-area');
-    const fileInput = document.getElementById('file-upload');
-
-    dropArea.addEventListener('click', (e) => {
-        if(e.target.closest('button')) return;
-        fileInput.click();
-    });
-
-    function previewFile() {
-        const previewContainer = document.getElementById('preview-container');
-        const uploadPlaceholder = document.getElementById('upload-placeholder');
-        const file = fileInput.files[0];
-        const imgPreview = document.getElementById('img-preview');
-        const videoPreview = document.getElementById('video-preview');
-
-        if (file) {
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                uploadPlaceholder.classList.add('hidden');
-                previewContainer.classList.remove('hidden');
-
-                if (file.type.startsWith('image/')) {
-                    imgPreview.src = e.target.result;
-                    imgPreview.classList.remove('hidden');
-                    videoPreview.classList.add('hidden');
-                    videoPreview.src = "";
-                } else if (file.type.startsWith('video/')) {
-                    videoPreview.src = e.target.result;
-                    videoPreview.classList.remove('hidden');
-                    imgPreview.classList.add('hidden');
-                }
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function removeFile() {
-        fileInput.value = "";
-
-        document.getElementById('preview-container').classList.add('hidden');
-        document.getElementById('upload-placeholder').classList.remove('hidden');
-        document.getElementById('img-preview').src = "";
-        document.getElementById('video-preview').src = "";
-    }
-</script>

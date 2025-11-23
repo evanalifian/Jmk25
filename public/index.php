@@ -31,12 +31,10 @@ Router::add("GET", "/profile", HomeController::class, "profile");
 // Router::add("GET", "/([0-9a-zA-Z]*)/id/([0-9a-zA-Z]*)", HomeController::class, "index");
 
 // Post routes
-Router::add("GET", "/post/create", PostController::class, "create"); // Menampilkan form
-Router::add("POST", "/post/store", PostController::class, "store");  // Menyimpan data
-
-
+Router::add("GET", "/create", PostController::class, "renderCreate"); // Menampilkan form
+Router::add("POST", "/store", PostController::class, "store");  // Menyimpan data
 // Halaman Notifikasi
-Router::add("GET", "/notifications", PostController::class, "notifications");
+Router::add("GET", "/notifications", PostController::class, "renderNotifications");
 
 // Eksekusi route yang dituju
 Router::run();
