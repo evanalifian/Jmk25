@@ -40,7 +40,7 @@ class UserController {
       View::redirect("/user/signin");
     } catch (ValidationException $err) {
       View::render("user/signup", [
-        "title" => "Register new account",
+        "title" => "Gagal Register",
         "err_msg" => $err->getMessage()
       ]);
     }
@@ -57,14 +57,19 @@ class UserController {
       $statement->execute([$username]);
 
       $hash_password = "";
+      $id_user = "";
       foreach ($statement as $s) {
         $hash_password = $s["user_password"];
+        $id_user = $s["id"];
       }
-      if (md5($password) != $hash_password) {
+      if ($password != $hash_password) {
         throw new ValidationException("Password salah");
       } else {
         session_start();
-        $_SESSION["login"] = true;
+        $_SESSION["login"] = [
+          "login" => true,
+          "id_user" => $id_user,
+        ];
         View::redirect("/");
       }
     } catch (ValidationException $err) {

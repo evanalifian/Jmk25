@@ -21,6 +21,7 @@ use Jmk25\Middlewares\IsNotAuthMiddleware;
 use Jmk25\Controllers\HomeController;
 use Jmk25\Controllers\UserController;
 use Jmk25\Controllers\PostController;
+use Jmk25\Controllers\ProfileController;
 
 
 // User path routes
@@ -34,7 +35,7 @@ Router::add("GET", "/user/logout", UserController::class, "logout");
 // Landing page route
 Router::add("GET", "/", HomeController::class, "index", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/landing", HomeController::class, "landing");
-Router::add("GET", "/profile", HomeController::class, "profile", [IsNotAuthMiddleware::class]);
+Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMiddleware::class]);
 // Router::add("GET", "/", HomeController::class, "landing");
 // Router::add("GET", "/([0-9a-zA-Z]*)/id/([0-9a-zA-Z]*)", HomeController::class, "index");
 
@@ -42,7 +43,6 @@ Router::add("GET", "/profile", HomeController::class, "profile", [IsNotAuthMiddl
 Router::add("GET", "/create", PostController::class, "renderCreate"); // Menampilkan form
 Router::add("POST", "/store", PostController::class, "store");  // Menyimpan data
 // Halaman Notifikasi
-Router::add("GET", "/notifications", PostController::class, "renderNotifications");
 
 // Eksekusi route yang dituju
 Router::run();

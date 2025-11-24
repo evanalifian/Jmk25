@@ -1,7 +1,7 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-mainBg">
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img id="app-logo" src="/assets/logowhite.png" alt="Jmk25 Logo" class="mx-auto h-12 w-auto object-contain" />
+    <img id="app-logo" class="mx-auto h-12 w-auto object-contain" src="/assets/logo.png" alt="Jmk25 Logo" />
 
     <h2 class="mt-8 text-center text-2xl/9 font-bold tracking-tight text-mainText">
       Sign up dulu, bro
@@ -9,6 +9,7 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <?= isset($model) ? $model["err_msg"] : null ?>
     <form action="/user/signup" method="POST" class="space-y-6">
 
       <div>
@@ -17,6 +18,24 @@
           <input type="text" id="username" name="username"
             class="block w-full rounded-lg border-0 bg-secondBg px-4 py-3 text-mainText shadow-sm ring-1 ring-inset ring-mainGray/20 placeholder:text-mainText/30 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm/6 transition-all outline-none"
             placeholder="Pilih username kerenmu" />
+        </div>
+      </div>
+
+      <div>
+        <label for="user_display" class="block text-sm/6 font-medium text-mainText/80">Display Name</label>
+        <div class="mt-2">
+          <input id="user_display" type="user_display" name="user_display" autocomplete="current-user_display"
+            class="block w-full rounded-lg border-0 bg-secondBg px-4 py-3 text-mainText shadow-sm ring-1 ring-inset ring-mainGray/20 placeholder:text-mainText/30 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm/6 transition-all outline-none"
+            placeholder="Masukkan username kerenmu" />
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm/6 font-medium text-mainText/80">Email</label>
+        <div class="mt-2">
+          <input id="email" type="email" name="email" autocomplete="current-email"
+            class="block w-full rounded-lg border-0 bg-secondBg px-4 py-3 text-mainText shadow-sm ring-1 ring-inset ring-mainGray/20 placeholder:text-mainText/30 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm/6 transition-all outline-none"
+            placeholder="Masukkan username kerenmu" />
         </div>
       </div>
 
@@ -43,6 +62,5 @@
         Sign in di sini
       </a>
     </p>
-    <?= $model["err_msg"] ? $model["err_msg"] : null ?>
   </div>
 </div>

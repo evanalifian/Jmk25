@@ -2,8 +2,8 @@
             -bottom-2 left-0 w-full h-16 flex flex-row justify-between items-center
             md:border-t-0 md:top-0 md:h-screen md:w-auto md:px-4 md:py-3 md:flex-col md:space-y-2">
 
-  <a href="#" class="hidden md:block p-3 mb-2 opacity-80 hover:opacity-100 transition-opacity">
-    <img id="app-logo" class="w-12 h-8 object-contain" src="/assets/logowhite.png" alt="Logo">
+  <a href="/" class="hidden md:block p-3 mb-2 opacity-80 hover:opacity-100 transition-opacity">
+    <img id="app-logo" class="w-12 h-8 object-contain" src="/assets/logo.png" alt="Logo">
   </a>
 
   <div class="hidden md:block flex-grow"></div>
@@ -19,8 +19,7 @@
       </ion-icon>
     </a>
 
-    <a href="/create" id="nav-add" data-icon="add-circle"
-      class="sidebar-icon group p-3 duration-300 transition-colors">
+    <a href="/create" id="nav-add" data-icon="add-circle" class="sidebar-icon group p-3 duration-300 transition-colors">
       <ion-icon name="add-circle-outline"
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>
@@ -42,7 +41,7 @@
 
   <div class="hidden md:flex flex-col items-center space-y-2 mb-2">
 
-    <a href="#" id="nav-filter" data-icon="filter" class="sidebar-icon group p-3 duration-300 transition-colors">
+    <a href="" id="nav-filter" data-icon="filter" class="sidebar-icon group p-3 duration-300 transition-colors">
       <ion-icon name="filter-outline" class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
