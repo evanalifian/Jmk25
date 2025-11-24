@@ -67,7 +67,9 @@ class UserController {
       if (md5($password) != $hash_password) {
         throw new ValidationException("Password salah");
       } else {
+        if (session_status() == PHP_SESSION_NONE) {
         session_start();
+        }
         $_SESSION["login"] = [
           "login" => true,
           "id_user" => $id_user,
@@ -83,7 +85,9 @@ class UserController {
   }
 
   public function logout() {
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     session_destroy();
     session_unset();
     View::redirect("/user/signin");
