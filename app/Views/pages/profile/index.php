@@ -53,7 +53,6 @@
           <div class="flex w-full border-b border-mainGray mt-6">
             <div
               class="flex-1 py-3 flex justify-center items-center cursor-pointer border-b-2 border-mainText transition-colors hover:bg-mainGray/5">
-              <ion-icon name="cube-outline" class="text-xl text-mainText"></ion-icon>
             </div>
             <div
               class="flex-1 py-3 flex justify-center items-center cursor-pointer transition-colors hover:bg-mainGray/5">
