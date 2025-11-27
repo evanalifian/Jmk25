@@ -13,6 +13,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
  */
 use Jmk25\App\Router;
 
+
 // Middlewares
 use Jmk25\Middlewares\IsAuthMiddleware;
 use Jmk25\Middlewares\IsNotAuthMiddleware;
@@ -22,7 +23,7 @@ use Jmk25\Controllers\HomeController;
 use Jmk25\Controllers\UserController;
 use Jmk25\Controllers\PostController;
 use Jmk25\Controllers\ProfileController;
-
+use Jmk25\Controllers\GroupController;
 
 // User path routes
 Router::add("GET", "/user/signup", UserController::class, "renderSignup", [IsAuthMiddleware::class]);
@@ -42,7 +43,13 @@ Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMi
 // Post routes
 Router::add("GET", "/create", PostController::class, "renderCreate"); // Menampilkan form
 Router::add("POST", "/store", PostController::class, "store");  // Menyimpan data
-// Halaman Notifikasi
+Router::add("GET", "/group/group_display", GroupController::class, "renderDetail");// Menampilkan halaman detail grup
+
+// fitur join nanti
+Router::add("POST", "/group/join", GroupController::class, "join");
+
+// Tambahkan baris ini
+Router::add("GET", "/explore", \Jmk25\Controllers\GroupController::class, "renderExplore");
 
 // Eksekusi route yang dituju
 Router::run();
