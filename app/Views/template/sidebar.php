@@ -57,8 +57,7 @@ function getIconName($path, $name, $currentPath) {
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>
 
-    <a href="/<?= $userId; ?>/saved" id="nav-mark"
-      class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="bookmark" id="nav-bookmark" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/saved', 'bookmark', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>

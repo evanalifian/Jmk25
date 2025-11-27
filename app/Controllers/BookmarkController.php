@@ -46,11 +46,20 @@ class BookmarkController {
         $marks = BookmarkModel::GetAllBookmark($userId);
         
         $currentUsername = $_SESSION['login']['username'] ?? 'User';
+        $model = [
+        "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
+        "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
+        "data" => $marks,
+        "username" => $currentUsername,
+        "menus" => [
+        [ "text" => "Tersimpan", 
+          "url" => "/bookmark",
+          "active" => true]
+        ],
+        "hideSidebar" => false
+        ];
         
-        View::render("/pages/mark/index", [ 
-            "title" => "Disimpan | " . $currentUsername,
-            "marks" => $marks // Ganti variabel dari $bookmarks menjadi $marks
-        ]);
+        View::render("/bookmark/index", $model);
     }
 
 }
