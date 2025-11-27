@@ -10,6 +10,7 @@
 
       <div class="pt-8 pb-2 flex flex-col">
 
+
         <?php 
             $profileUser = $model["data"][0] ?? null; 
         ?>
@@ -72,7 +73,6 @@
           <div
             class="flex-1 py-3 flex justify-center items-center cursor-pointer border-b-2 border-mainText transition-colors hover:bg-mainGray/5">
           </div>
-        </div>
 
       </div>
 
@@ -98,8 +98,6 @@
       </div>
 
     </div>
-  </div>
-
-  <?php require_once __DIR__ . '/../../partials/ImageModal.php'; ?>
+  </div>  <?php require_once __DIR__ . '/../../partials/ImageModal.php'; ?>
 
 </main>

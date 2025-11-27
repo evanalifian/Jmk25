@@ -9,7 +9,7 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <?= isset($model) ? $model["err_msg"] : null ?>
+    <?= isset($model) && isset($model["err_msg"]) ? $model["err_msg"] : null ?>
     <form action="/user/signup" method="POST" class="space-y-6">
 
       <div>

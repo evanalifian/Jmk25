@@ -19,10 +19,12 @@ class UserModel {
     }
   }
   
-  public static function register($username, $password){
-    $statement = self::conn()->prepare("INSERT INTO user(username, user_password) VALUES (?, ?)");
+  public static function register($username, $user_display, $email, $password){
+    $statement = self::conn()->prepare("INSERT INTO user(username, user_display, user_email, user_password) VALUES (?, ?, ?, ?)");
     $statement->execute([
       $username,
+      $user_display,
+      $email,
       md5($password)
     ]);
   }
