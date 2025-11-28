@@ -45,11 +45,16 @@ Router::add("GET", "/create", PostController::class, "renderCreate"); // Menampi
 Router::add("POST", "/store", PostController::class, "store");  // Menyimpan data
 Router::add("GET", "/group/group_display", GroupController::class, "renderDetail");// Menampilkan halaman detail grup
 
-// fitur join nanti
+// fitur join
 Router::add("POST", "/group/join", GroupController::class, "join");
 
 // Tambahkan baris ini
 Router::add("GET", "/explore", \Jmk25\Controllers\GroupController::class, "renderExplore");
+
+// follow
+Router::add("POST", "/user/follow", \Jmk25\Controllers\UserController::class, "follow");
+// keluar grub
+Router::add("POST", "/group/leave", \Jmk25\Controllers\GroupController::class, "leave");
 
 // Eksekusi route yang dituju
 Router::run();
