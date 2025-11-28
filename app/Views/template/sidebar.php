@@ -14,7 +14,7 @@
       <ion-icon name="home" class="text-3xl text-mainText transition-colors"></ion-icon>
     </a>
 
-    <a href="/search" id="nav-search" data-icon="search" class="sidebar-icon group p-3 duration-300 transition-colors">
+    <a href="/explore" id="nav-search" data-icon="search" class="sidebar-icon group p-3 duration-300 transition-colors">
       <ion-icon name="search-outline" class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>

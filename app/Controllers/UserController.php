@@ -92,4 +92,31 @@ class UserController {
     session_unset();
     View::redirect("/user/signin");
   }
+  public function follow() {
+    // Hanya terima request POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        // Ambil ID user yang login (Follower)
+        // Pastikan session sudah start dan key-nya benar
+        if (session_status() == PHP_SESSION_NONE) session_start();
+        $myId = $_SESSION['login']['id_user'] ?? 0; // Sesuaikan dengan key session login Anda (misal: 'id' atau 'id_user')
+
+        // Ambil ID user yang mau difollow (Following) dari data yang dikirim JS
+        $targetId = $_POST['user_id'] ?? 0;
+
+        if ($myId != 0 && $targetId != 0 && $myId != $targetId) {
+            // Panggil Model
+            $success = \Jmk25\Models\UserModel::followUser($myId, $targetId);
+            
+            if ($success) {
+                echo json_encode(['status' => 'success', 'message' => 'Berhasil mengikuti']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Sudah mengikuti']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid ID']);
+        }
+        exit; // PENTING: Stop script agar tidak me-render view apapun
+    }
+  }
 }

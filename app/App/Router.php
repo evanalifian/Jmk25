@@ -3,7 +3,8 @@
 // Membuat namespace berdasarkan namespace autoload
 namespace Jmk25\App;
 
-class Router {
+class Router
+{
   /**
    * Informasi Route yang akan dijalankan
    * @var array
@@ -18,7 +19,8 @@ class Router {
    * @param string $function
    * @return void
    */
-  public static function add(string $method, string $path, string $controller, string $function, array $middlewares = []): void {
+  public static function add(string $method, string $path, string $controller, string $function, array $middlewares = []): void
+  {
     self::$routes[] = [
       "method" => $method,
       "path" => $path,
@@ -32,13 +34,19 @@ class Router {
    * jalankankan Route yang sudah didaftarkan
    * @return void
    */
-  public static function run() {
-    $path = "/";
-    $method = $_SERVER['REQUEST_METHOD'];
+  public static function run()
+  {
+    $path = '/';
 
-    if (isset($_SERVER['REQUEST_URI'])) {
-      $path = $_SERVER['REQUEST_URI'];
+    if (isset($_SERVER['PATH_INFO'])) {
+      $path = $_SERVER['PATH_INFO'];
+    } elseif (isset($_SERVER['REQUEST_URI'])) {
+      // --- BAGIAN PENTING YANG HARUS DIUBAH ---
+      // Pakai parse_url agar '?id=1' dibuang saat mencocokkan rute
+      $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
+
+    $method = $_SERVER['REQUEST_METHOD'];
 
     foreach (self::$routes as $route) {
       $pattern = "#^" . $route['path'] . "$#";
@@ -56,7 +64,7 @@ class Router {
         return;
       }
     }
-  
+
     // Kembalikan ika halaman tidak ditemukan
     http_response_code(404);
     echo "Halaman tidak ditemukan";
