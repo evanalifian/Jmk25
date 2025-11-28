@@ -49,12 +49,15 @@ Router::add("GET", "/group/group_display", GroupController::class, "renderDetail
 Router::add("POST", "/group/join", GroupController::class, "join");
 
 // Tambahkan baris ini
-Router::add("GET", "/explore", \Jmk25\Controllers\GroupController::class, "renderExplore");
+Router::add("GET", "/explore", GroupController::class, "renderExplore");
 
 // follow
-Router::add("POST", "/user/follow", \Jmk25\Controllers\UserController::class, "follow");
+Router::add("POST", "/user/follow", UserController::class, "follow");
 // keluar grub
-Router::add("POST", "/group/leave", \Jmk25\Controllers\GroupController::class, "leave");
+Router::add("POST", "/group/leave", GroupController::class, "leave");
+// kick member
+// Tambahkan baris ini
+Router::add("POST", "/group/kick", GroupController::class, "kickMember");
 
 // Eksekusi route yang dituju
 Router::run();

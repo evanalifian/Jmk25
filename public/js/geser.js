@@ -36,39 +36,29 @@ function switchTab(tabName) {
 }
 
 function switchView(viewName) {
-    const postsDiv = document.getElementById('view-posts');
-    const membersDiv = document.getElementById('view-members');
-    const tabPosts = document.getElementById('tab-posts');
-    const tabMembers = document.getElementById('tab-members');
+        const postsDiv = document.getElementById('view-posts');
+        const membersDiv = document.getElementById('view-members');
+        const tabPosts = document.getElementById('tab-posts');
+        const tabMembers = document.getElementById('tab-members');
+        const activeClass = ['text-blue-500', 'border-blue-500'];
+        const inactiveClass = ['hover:text-mainText', 'border-transparent'];
 
-    // Reset Style Tombol (Hapus class aktif)
-    const activeClass = ['text-blue-500', 'border-blue-500'];
-    const inactiveClass = ['hover:text-mainText', 'border-transparent'];
-
-    if(viewName === 'posts') {
-        // Tampilkan Post, Sembunyikan Member
-        postsDiv.classList.remove('hidden');
-        membersDiv.classList.add('hidden');
-
-        // Update Tab Style
-        tabPosts.classList.add(...activeClass);
-        tabPosts.classList.remove(...inactiveClass);
-        
-        tabMembers.classList.remove(...activeClass);
-        tabMembers.classList.add(...inactiveClass);
-    } else {
-        // Tampilkan Member, Sembunyikan Post
-        membersDiv.classList.remove('hidden');
-        postsDiv.classList.add('hidden');
-
-        // Update Tab Style
-        tabMembers.classList.add(...activeClass);
-        tabMembers.classList.remove(...inactiveClass);
-
-        tabPosts.classList.remove(...activeClass);
-        tabPosts.classList.add(...inactiveClass);
+        if(viewName === 'posts') {
+            postsDiv.classList.remove('hidden');
+            membersDiv.classList.add('hidden');
+            tabPosts.classList.add(...activeClass);
+            tabPosts.classList.remove(...inactiveClass);
+            tabMembers.classList.remove(...activeClass);
+            tabMembers.classList.add(...inactiveClass);
+        } else {
+            membersDiv.classList.remove('hidden');
+            postsDiv.classList.add('hidden');
+            tabMembers.classList.add(...activeClass);
+            tabMembers.classList.remove(...inactiveClass);
+            tabPosts.classList.remove(...activeClass);
+            tabPosts.classList.add(...inactiveClass);
+        }
     }
-}
 
 function handleFollow(btn, userId) {
   // 1. Ubah tampilan tombol biar terlihat loading/proses
@@ -106,35 +96,47 @@ function handleFollow(btn, userId) {
 }
 
 function handleJoin(btn, groupId) {
-        // 1. Ubah tampilan jadi loading
-        const originalText = btn.innerText;
-        btn.innerText = "...";
-        btn.disabled = true;
+    // 1. Efek Loading
+    const originalText = btn.innerText;
+    btn.innerText = "...";
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
 
-        // 2. Kirim ke Server
-        const formData = new FormData();
-        formData.append('group_id', groupId);
+    // 2. Data
+    const formData = new FormData();
+    formData.append('group_id', groupId);
 
-        fetch('/group/join', {  // Pastikan rute ini ada di index.php
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            // Cek apakah responnya JSON atau bukan
-            // Jika Controller Anda me-redirect (bukan echo json), kita perlu reload halaman
-            if (response.redirected || response.status === 200) {
-                 // Ubah tombol jadi Joined
-                btn.innerText = "Joined";
-                btn.classList.remove('bg-black', 'hover:bg-gray-900');
-                btn.classList.add('bg-gray-600', 'border-gray-500');
-                
-                // Opsional: Redirect ke detail grup
-                // window.location.href = "/group/detail?id=" + groupId;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+    // 3. Fetch ke Controller
+    fetch('/group/join', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json()) // Harap controller mengembalikan JSON
+    .then(data => {
+        if (data.status === 'success') {
+            // BERHASIL: Ubah tampilan tombol jadi "Joined" permanen
+            btn.innerText = "Joined";
+            
+            // Hapus class tombol aktif (hitam)
+            btn.classList.remove('bg-black', 'hover:bg-gray-900', 'border-gray-700');
+            
+            // Tambah class tombol disable (abu-abu)
+            btn.classList.add('bg-gray-600', 'border-gray-500', 'cursor-default', 'opacity-80');
+            
+            // Pastikan tetap disabled
+            btn.disabled = true;
+        } else {
+            // GAGAL: Kembalikan tombol
+            alert('Gagal bergabung: ' + (data.message || 'Error'));
             btn.innerText = originalText;
             btn.disabled = false;
-        });
-    }
+            btn.style.opacity = "1";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        btn.innerText = originalText;
+        btn.disabled = false;
+        btn.style.opacity = "1";
+    });
+}
