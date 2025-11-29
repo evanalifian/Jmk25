@@ -11,6 +11,8 @@ require_once __DIR__ . "/../vendor/autoload.php";
  * Memanggil class Controller yang dibutuhkan untuk setiap halaman
  * Memanggil class Controller untuk middleware
  */
+
+use Dom\Comment;
 use Jmk25\App\Router;
 
 
@@ -23,7 +25,12 @@ use Jmk25\Controllers\HomeController;
 use Jmk25\Controllers\UserController;
 use Jmk25\Controllers\PostController;
 use Jmk25\Controllers\ProfileController;
+use Jmk25\Controllers\BookmarkController;
+use Jmk25\Controllers\CommentController;
+use Jmk25\Controllers\LandingPageController;
+use Jmk25\Controllers\LikesController;
 use Jmk25\Controllers\GroupController;
+
 
 // User path routes
 Router::add("GET", "/user/signup", UserController::class, "renderSignup", [IsAuthMiddleware::class]);
@@ -35,7 +42,7 @@ Router::add("GET", "/user/logout", UserController::class, "logout");
 
 // Landing page route
 Router::add("GET", "/", HomeController::class, "index", [IsNotAuthMiddleware::class]);
-Router::add("GET", "/landing", HomeController::class, "landing");
+Router::add("GET", "/landing", LandingPageController::class, "index", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMiddleware::class]);
 // Router::add("GET", "/", HomeController::class, "landing");
 // Router::add("GET", "/([0-9a-zA-Z]*)/id/([0-9a-zA-Z]*)", HomeController::class, "index");
@@ -49,12 +56,22 @@ Router::add("GET", "/group/group_display", GroupController::class, "renderDetail
 Router::add("POST", "/group/join", GroupController::class, "join");
 
 // Tambahkan baris ini
-Router::add("GET", "/explore", \Jmk25\Controllers\GroupController::class, "renderExplore");
+Router::add("GET", "/explore", GroupController::class, "renderExplore");
 
 // follow
-Router::add("POST", "/user/follow", \Jmk25\Controllers\UserController::class, "follow");
+Router::add("POST", "/user/follow", UserController::class, "follow");
 // keluar grub
-Router::add("POST", "/group/leave", \Jmk25\Controllers\GroupController::class, "leave");
+Router::add("POST", "/group/leave", GroupController::class, "leave");
+
+// Bookmark route
+Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);
+Router::add("GET", "/bookmark", BookmarkController::class, "index", [IsNotAuthMiddleware::class]);
+
+// likes
+Router::add("POST", "/like/toggle", LikesController::class, "toggle", [IsNotAuthMiddleware::class]);
+
+// comments
+// Router::add("GET", "/post/detail", CommentController::class, "detail", [IsNotAuthMiddleware::class]);
 
 // Eksekusi route yang dituju
 Router::run();

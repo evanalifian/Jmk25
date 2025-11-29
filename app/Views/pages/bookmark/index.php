@@ -19,7 +19,7 @@
 
       <div class="py-20 text-center text-mainText/50 flex flex-col items-center">
         <ion-icon name="images-outline" class="text-5xl mb-4 opacity-50"></ion-icon>
-        <p>Belum ada meme yang tersedia saat ini.</p>
+        <p>Belum ada meme yang tersimpan saat ini.</p>
       </div>
 
       <?php endif; ?>
@@ -28,5 +28,6 @@
   </div>
 
   <?php require_once __DIR__ . '/../../partials/ImageModal.php'; ?>
+
 
 </main>

@@ -32,7 +32,7 @@
           alt="Logo JMK25 Dark">
       </a>
 
-      <a href="/login"
+      <a href="/user/signin"
         class="px-8 py-2.5 rounded-xl font-bold border-2 border-mainGray text-mainText hover:bg-accent hover:text-mainBg hover:border-accent transition-all duration-300">
         Login
       </a>

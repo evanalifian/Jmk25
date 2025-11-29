@@ -1,17 +1,41 @@
-<?php require_once __DIR__ . '/CommentModal.php'; ?>
+<?php 
+// 1. Logika BOOKMARK
+$isBookmarked = $post['is_bookmarked'] ?? 0; 
+$btnBookmarkClass = $isBookmarked ? 'text-accent' : 'text-mainText';
+$iconBookmarkName = $isBookmarked ? 'bookmark' : 'bookmark-outline';
+
+// 2. Logika LIKE (Baru)
+$isLiked = $post['is_liked'] ?? 0;
+$btnLikeClass = $isLiked ? 'text-red-500' : 'text-mainText';
+$iconLikeName = $isLiked ? 'heart' : 'heart-outline';
+$totalLikes = $post['total_likes'] ?? 0;
+
+// 3. Logika COMMENT (Baru)
+$totalComments = $post['total_comments'] ?? 0;
+?>
+
+
 <div class="flex items-center justify-between mt-3 mb-2">
 
   <div class="flex items-center gap-6">
-    <button onclick="toggleLike(this)" id="likes"
-      class="group flex items-center gap-2 cursor-pointer transition-colors text-mainText hover:text-red-500">
-      <ion-icon name="heart-outline" class="text-2xl group-hover:scale-110 transition-transform"></ion-icon>
-      <span class="count-label text-sm font-medium text-mainGray transition-colors">1.2k</span>
+
+    <button onclick="toggleLike(this)" id="likes" data-id="<?= $post['id_upload'] ?>"
+      class="group flex items-center gap-2 cursor-pointer transition-colors hover:text-red-500 <?= $btnLikeClass ?>">
+
+      <ion-icon name="<?= $iconLikeName ?>" class="text-2xl group-hover:scale-110 transition-transform"></ion-icon>
+
+      <span class="count-label text-sm font-medium text-mainGray transition-colors group-hover:text-red-500/80">
+        <?= $totalLikes ?>
+      </span>
     </button>
 
-    <button onclick="handleComment(this)" id="comment"
+    <button onclick="handleComment(this)" data-id="<?= $post['id_upload'] ?>"
+      data-username="<?= htmlspecialchars($post['username']) ?>"
+      data-caption="<?= htmlspecialchars($post['upload_caption']) ?>"
       class="group flex items-center gap-2 cursor-pointer transition-colors text-mainText hover:text-blue-400">
+
       <ion-icon name="chatbubble-outline" class="text-2xl group-hover:scale-110 transition-transform"></ion-icon>
-      <span class="text-sm font-medium text-mainGray transition-colors">45</span>
+      <span class="text-sm font-medium text-mainGray"><?= $totalComments ?></span>
     </button>
 
     <button onclick="handleShare(this)" id="shared"
@@ -23,9 +47,9 @@
 
   </div>
 
-  <button onclick="toggleBookmark(this)" id="bookmark"
-    class="group flex items-center cursor-pointer transition-colors text-mainText hover:text-accent">
-    <ion-icon name="bookmark-outline" class="text-2xl group-hover:scale-110 transition-transform"></ion-icon>
+  <button onclick="toggleBookmark(this)" data-id="<?= $post['id_upload'] ?>"
+    class="group flex items-center cursor-pointer transition-colors hover:text-accent <?= $btnBookmarkClass ?>">
+    <ion-icon name="<?= $iconBookmarkName ?>" class="text-2xl group-hover:scale-110 transition-transform"></ion-icon>
   </button>
 
 </div>
@@ -36,31 +60,76 @@ if (!window.interactFunctionsDefined) {
 
   window.toggleLike = function(btn) {
     const icon = btn.querySelector('ion-icon');
+    const label = btn.querySelector('.count-label'); // Ambil elemen angka
     const isActive = btn.classList.contains('text-red-500');
+    const postId = btn.getAttribute('data-id');
+
+    // Ambil angka saat ini dan ubah ke integer
+    let currentCount = parseInt(label.innerText) || 0;
 
     if (!isActive) {
+      // VISUAL: LIKE
       btn.classList.remove('text-mainText');
       btn.classList.add('text-red-500');
       icon.setAttribute('name', 'heart');
 
+      // Update Angka (+1)
+      label.innerText = currentCount + 1;
+
+      // Animasi
       icon.classList.add('scale-125');
       setTimeout(() => icon.classList.remove('scale-125'), 200);
     } else {
+      // VISUAL: UNLIKE
       btn.classList.remove('text-red-500');
       btn.classList.add('text-mainText');
       icon.setAttribute('name', 'heart-outline');
+
+      // Update Angka (-1) (Pastikan tidak minus)
+      label.innerText = Math.max(0, currentCount - 1);
     }
+
+    if (postId) {
+      const formData = new FormData();
+      formData.append('id_upload', postId);
+
+      // Kirim ke LikeController
+      fetch('/like/toggle', {
+          method: 'POST',
+          body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.status === 'success') {
+            console.log("Like status:", data.action);
+          } else {
+            console.error("Gagal like:", data.message);
+            // Opsional: Balikin angka likes ke semula jika gagal
+          }
+        })
+        .catch(e => console.error(e));
+    }
+
+    // KIRIM KE BACKEND (Opsional: Jika sudah punya LikeController)
+    /*
+    const formData = new FormData();
+    formData.append('id_upload', postId);
+    fetch('/like/toggle', { method: 'POST', body: formData });
+    */
   };
 
+  // --- FUNGSI BOOKMARK (SAMA SEPERTI SEBELUMNYA) ---
   window.toggleBookmark = function(btn) {
     const icon = btn.querySelector('ion-icon');
     const isActive = btn.classList.contains('text-accent');
+    const postId = btn.getAttribute('data-id');
+
+    if (!postId) return;
 
     if (!isActive) {
       btn.classList.remove('text-mainText');
       btn.classList.add('text-accent');
       icon.setAttribute('name', 'bookmark');
-
       icon.classList.add('scale-125');
       setTimeout(() => icon.classList.remove('scale-125'), 200);
     } else {
@@ -68,32 +137,55 @@ if (!window.interactFunctionsDefined) {
       btn.classList.add('text-mainText');
       icon.setAttribute('name', 'bookmark-outline');
     }
+
+    const formData = new FormData();
+    formData.append('id_upload', postId);
+
+    fetch('/bookmark/toggle', {
+        method: 'POST',
+        body: formData
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status !== 'success') console.error(data.message);
+      });
   };
 
+  // --- FUNGSI KOMENTAR ---
+  // --- FUNGSI KOMENTAR (MODAL) ---
   window.handleComment = function(btn) {
     const icon = btn.querySelector('ion-icon');
 
+    // Animasi Klik
     icon.classList.add('scale-90');
     setTimeout(() => icon.classList.remove('scale-90'), 150);
 
-    window.openCommentModal({
-      author: 'Pengguna',
-      text: 'Ini konten postingan asli',
-      time: '1j',
-      avatar: 'url_avatar',
-      verified: true, // optional
-      quote: '<p>Quote content</p>', // optional
-      showTranslate: true // optional
-    })
+    // Ambil Data dari Atribut Data (Lebih Aman)
+    const postId = btn.getAttribute('data-id');
+    const username = btn.getAttribute('data-username');
+    const caption = btn.getAttribute('data-caption');
+
+    // Panggil Fungsi Modal (Pastikan fungsi openCommentModal ada di file CommentModal.php)
+    // NOTE: Sesuaikan nama fungsinya, apakah 'openComment' atau 'openCommentModal'?
+    if (typeof window.openComment === 'function') {
+      window.openComment(postId, username, caption);
+    } else if (typeof window.openCommentModal === 'function') {
+      window.openCommentModal({
+        id: postId,
+        author: username,
+        text: caption
+      });
+    } else {
+      console.error("Fungsi openComment tidak ditemukan!");
+    }
   };
 
+  // --- FUNGSI SHARE ---
   window.handleShare = function(btn) {
     const icon = btn.querySelector('ion-icon');
     const tooltip = btn.querySelector('.share-tooltip');
-
     icon.classList.add('translate-x-1', '-translate-y-1');
     setTimeout(() => icon.classList.remove('translate-x-1', '-translate-y-1'), 200);
-
     if (tooltip) {
       tooltip.classList.remove('opacity-0');
       setTimeout(() => tooltip.classList.add('opacity-0'), 1500);

@@ -5,10 +5,13 @@ use Jmk25\App\View;
 use Jmk25\Models\PostModel;
 
 class HomeController {
-public static function index(): void {
-  $data = PostModel::getAllPhotoPosts();
-  
-  $model = [
+public function index() {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    $userId = $_SESSION['login']['id_user'] ?? 0;
+
+    $data = PostModel::getAllPhotoPosts($userId);
+    $model = [
       "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
       "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
       "data" => $data,
@@ -28,17 +31,6 @@ public static function index(): void {
     
     View::render("/home/dashboard", $model);
   }
-  
-  public static function landing(){
-    $model = [
-      "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
-      "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
-      "hideSidebar" => false
-    ];
-    View::renderLanding("/home/landing", $model);
-  }
-  
-
 }
 
 ?>

@@ -1,7 +1,7 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img id="app-logo" class="mx-auto h-12 w-auto object-contain" src="/assets/logo.png" alt="Jmk25 Logo" />
+    <img class="app-logo-img mx-auto h-12 w-auto object-contain" src="/assets/logo.png" alt="Jmk25 Logo" />
 
     <h2 class="mt-8 text-center text-2xl/9 font-bold tracking-tight text-mainText">
       Sign up dulu, bro

@@ -6,6 +6,7 @@
 <script src="/js/theme.js"></script>
 <script src="/js/dropdown.js"></script>
 <script src="/js/sidebar.js"></script>
+
 <script src="/js/app.js"></script>
 <script src="/js/dragDrop.js"></script>
 <script src="/js/geser.js"></script>

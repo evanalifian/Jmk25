@@ -18,7 +18,8 @@ class PostController
                     'url' => '#',
                     'active' => true
                 ]
-            ]
+                ],
+            "hideSidebar" => false
         ];
 
         // Memanggil file: app/Views/pages/post/create.php

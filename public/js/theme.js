@@ -1,56 +1,58 @@
-document.addEventListener("DOMContentLoaded", () => {
+function setupThemeToggle() {
   const html = document.documentElement;
   const toggleButtons = document.querySelectorAll(".theme-toggle-btn");
-  const appLogo = document.getElementById("app-logo");
+  const appLogos = document.querySelectorAll(".app-logo-img");
+  const themeText = document.getElementById("themeText");
 
-  function updateAllIcons() {
+  function updateUI() {
+    const isDark = html.classList.contains("dark");
+
     toggleButtons.forEach((btn) => {
       const icon = btn.querySelector("ion-icon");
-      if (!icon) return;
+      if (icon) {
+        if (isDark) {
+          icon.setAttribute("name", "moon");
+        } else {
+          icon.setAttribute("name", "sunny");
+        }
+      }
 
-      if (html.classList.contains("dark")) {
-        icon.setAttribute("name", "sunny-outline");
-      } else {
-        icon.setAttribute("name", "moon-outline");
+      const dot = btn.querySelector("#themeDot");
+
+      if (dot) {
+        if (isDark) {
+          dot.classList.add("translate-x-full", "border-white");
+          dot.classList.remove("border-gray-300");
+        } else {
+          dot.classList.remove("translate-x-full", "border-white");
+          dot.classList.add("border-gray-300");
+        }
       }
     });
-  }
 
-  function updateLogo() {
-    if (!appLogo) return;
-    if (html.classList.contains("dark")) {
-      appLogo.src = "/assets/logowhite.png";
-    } else {
-      appLogo.src = "/assets/logo.png";
+    appLogos.forEach((logo) => {
+      logo.src = isDark ? "/assets/logowhite.png" : "/assets/logo.png";
+    });
+
+    if (themeText) {
+      themeText.innerText = isDark ? "Mode Gelap" : "Mode Terang";
     }
   }
 
   const savedTheme = localStorage.getItem("theme");
-  if (
-    savedTheme === "dark" ||
-    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (savedTheme === "dark" || (!savedTheme && systemDark)) {
     html.classList.add("dark");
   } else {
     html.classList.remove("dark");
   }
 
-  updateAllIcons();
-  updateLogo();
+  updateUI();
 
-  if (toggleButtons.length === 0) {
-    console.error(
-      "❌ Tidak ada tombol dengan class '.theme-toggle-btn' ditemukan!"
-    );
-  } else {
-    console.log(
-      `✅ Ditemukan ${toggleButtons.length} tombol toggle. Siap digunakan.`
-    );
-
+  if (toggleButtons.length > 0) {
     toggleButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        console.log("🖱️ Tombol diklik!");
-
         html.classList.toggle("dark");
 
         if (html.classList.contains("dark")) {
@@ -59,15 +61,20 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem("theme", "light");
         }
 
-        updateAllIcons();
-        updateLogo();
+        updateUI();
 
         const icon = btn.querySelector("ion-icon");
         if (icon) {
-          icon.classList.add("rotate-90");
-          setTimeout(() => icon.classList.remove("rotate-90"), 300);
+          icon.classList.add(
+            "rotate-[360deg]",
+            "transition-transform",
+            "duration-500"
+          );
+          setTimeout(() => {
+            icon.classList.remove("rotate-[360deg]");
+          }, 500);
         }
       });
     });
   }
-});
+}
