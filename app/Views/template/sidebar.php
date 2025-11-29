@@ -35,13 +35,14 @@ function getIconName($path, $name, $currentPath) {
       </ion-icon>
     </a>
 
-    <a href="/grup" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
-      <ion-icon name="<?= getIconName('/grup', 'people', $currentPath); ?>"
+
+    <a href="/group" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+      <ion-icon name="<?= getIconName('/group', 'people', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
-    <a href="/search" id="nav-search" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="/explore" id="nav-search" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/search', 'search', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
