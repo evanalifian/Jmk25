@@ -10,3 +10,4 @@ node_modules/
 .pnpm-store/
 .cache/
 .env
+/public/css/*
