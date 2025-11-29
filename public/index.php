@@ -27,6 +27,7 @@ use Jmk25\Controllers\PostController;
 use Jmk25\Controllers\ProfileController;
 use Jmk25\Controllers\BookmarkController;
 use Jmk25\Controllers\CommentController;
+use Jmk25\Controllers\CreateGroupController;
 use Jmk25\Controllers\LandingPageController;
 use Jmk25\Controllers\LikesController;
 use Jmk25\Controllers\GroupController;
@@ -50,18 +51,21 @@ Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMi
 // Post routes
 Router::add("GET", "/create", PostController::class, "renderCreate"); // Menampilkan form
 Router::add("POST", "/store", PostController::class, "store");  // Menyimpan data
-Router::add("GET", "/group/group_display", GroupController::class, "renderDetail");// Menampilkan halaman detail grup
 
 // fitur join
-Router::add("POST", "/group/join", GroupController::class, "join");
 
 // Tambahkan baris ini
 Router::add("GET", "/explore", GroupController::class, "renderExplore");
 
 // follow
 Router::add("POST", "/user/follow", UserController::class, "follow");
-// keluar grub
+
+// Group
 Router::add("POST", "/group/leave", GroupController::class, "leave");
+Router::add("GET", "/group", GroupController::class, "renderDetail");// Menampilkan halaman detail grup
+Router::add("POST", "/group/join", GroupController::class, "join");
+Router::add("GET", "/group/create", CreateGroupController::class, "index", [IsNotAuthMiddleware::class]);
+Router::add("POST", "/group/create/post", CreateGroupController::class, "postCreateGroup");
 
 // Bookmark route
 Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);
