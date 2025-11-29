@@ -67,6 +67,13 @@ Router::add("POST", "/group/join", GroupController::class, "join");
 Router::add("GET", "/group/create", CreateGroupController::class, "index", [IsNotAuthMiddleware::class]);
 Router::add("POST", "/group/create/post", CreateGroupController::class, "postCreateGroup");
 
+// kick member
+Router::add("POST", "/group/kick", GroupController::class, "kickMember");
+
+//edit user
+Router::add("GET", "/user/edit", UserController::class, "renderEdit");
+Router::add("POST", "/user/update", UserController::class, "update");
+
 // Bookmark route
 Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/bookmark", BookmarkController::class, "index", [IsNotAuthMiddleware::class]);

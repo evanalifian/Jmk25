@@ -29,26 +29,46 @@ class UserModel {
     ]);
   }
   public static function getAllUsers() {
-    $sql = "SELECT id, username, user_display, user_pict FROM user ORDER BY user_created_at DESC LIMIT 10";
-    
+    $sql = "SELECT id, username, user_display, user_pict FROM user";
     $statement = self::conn()->prepare($sql);
     $statement->execute();
+    $allUsers = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-    return $statement->fetchAll(\PDO::FETCH_ASSOC);
-  }
+    $totalData = count($allUsers);
+    if ($totalData === 0) {
+        return [];
+    }
+    $limit = 6;
+
+    if ($totalData <= $limit) {
+        shuffle($allUsers); 
+        return $allUsers;
+    }
+    $randomUsers = [];
+    $usedIndices = [];
+    while (count($randomUsers) < $limit) {
+        $randomIndex = random_int(0, $totalData - 1);        
+        if (!in_array($randomIndex, $usedIndices)) {
+            
+            $randomUsers[] = $allUsers[$randomIndex];
+            $usedIndices[] = $randomIndex; 
+        }
+    }
+
+    return $randomUsers;
+}
   public static function followUser($followerId, $followingId) {
-    // 1. Cek dulu apakah sudah follow (agar tidak duplikat)
     $check = self::conn()->prepare("SELECT id_follow FROM follow WHERE follow_id_followers = ? AND follow_id_following = ?");
     $check->execute([$followerId, $followingId]);
     
     if ($check->rowCount() > 0) {
-        return false; // Sudah follow, jangan insert lagi
+        return false; 
     }
 
-    // 2. Jika belum, lakukan Insert
     $sql = "INSERT INTO follow (follow_id_followers, follow_id_following) VALUES (?, ?)";
     $stmt = self::conn()->prepare($sql);
     
+
     return $stmt->execute([$followerId, $followingId]);
   }
 
@@ -57,7 +77,7 @@ class UserModel {
     $stmt = self::conn()->prepare($sql);
     $stmt->execute([$followerId, $followingId]);
     
-    // Jika ada baris data, berarti sudah follow (return true)
+    
     return $stmt->rowCount() > 0;
   }
 }
