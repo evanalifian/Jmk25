@@ -37,23 +37,13 @@ class ProfileModel
     public static function getUserPosts($userId)
     {
         $db = self::conn();
-
-        $sql = "SELECT 
-                    upload.*, 
-                    content_foto.foto_img_url,
-                    content_foto.foto_alt_text,
-                    (SELECT COUNT(*) FROM `like` WHERE `like`.like_upload_id = upload.id_upload) AS total_likes,
-                    (SELECT COUNT(*) FROM komentar WHERE komentar.comment_upload_id = upload.id_upload) AS total_comments,
-                    (SELECT COUNT(*) FROM `like` WHERE `like`.like_upload_id = upload.id_upload AND `like`.like_user_id = :current_user_id) AS is_liked,
-                    (SELECT COUNT(*) FROM mark WHERE mark.mark_upload_id = upload.id_upload AND mark.mark_user_id = :current_user_id) AS is_bookmarked
-                FROM upload
-                JOIN content_foto ON (upload.id_upload = content_foto.id_upload)
-                WHERE upload.upload_user_id = :uid
-                ORDER BY upload.upload_created_at DESC";
-
+        $sql = "SELECT * FROM upload
+                JOIN user ON (user.id = upload.upload_user_id)
+                JOIN content_foto ON (content_foto.id_upload = upload.id_upload)
+                WHERE user.id = :uid";
         $statement = $db->prepare($sql);
 
-        $statement->execute(['uid' => $userId, 'current_user_id' => $userId]);
+        $statement->execute(['uid' => $userId]);
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
