@@ -63,6 +63,13 @@ Router::add("POST", "/user/follow", UserController::class, "follow");
 // keluar grub
 Router::add("POST", "/group/leave", GroupController::class, "leave");
 
+// kick member
+Router::add("POST", "/group/kick", GroupController::class, "kickMember");
+
+//edit user
+Router::add("GET", "/user/edit", UserController::class, "renderEdit");
+Router::add("POST", "/user/update", UserController::class, "update");
+
 // Bookmark route
 Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/bookmark", BookmarkController::class, "index", [IsNotAuthMiddleware::class]);

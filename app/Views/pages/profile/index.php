@@ -27,7 +27,9 @@
             ?>
             <img src="<?= $srcGambar; ?>" class="w-full h-full object-cover scale-150" alt="Profile Pict">
           </div>
-
+          <div>
+            <a href="/user/edit">gas edit</a>
+          </div>
           <div class="flex-1 flex flex-col">
 
             <div class="flex justify-between items-start">
