@@ -8,7 +8,7 @@ class CreateGroupController {
     
     public function index(){
         $model = [
-            "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
+            "title" => "Tersimpan",
             "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
             "data" => "",
             "menus" => [
