@@ -57,6 +57,7 @@ Router::add("POST", "/group/join", GroupController::class, "join");
 
 // Tambahkan baris ini
 Router::add("GET", "/explore", GroupController::class, "renderExplore");
+Router::add("POST", "/explore", GroupController::class, "explore");
 
 // follow
 Router::add("POST", "/user/follow", UserController::class, "follow");

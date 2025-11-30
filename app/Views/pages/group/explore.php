@@ -5,6 +5,7 @@ include __DIR__ . '/../../template/sidebar.php';
 
 $groups = $model['groups'] ?? [];
 $users = $model['users'] ?? [];
+$explore = $model['explore'] ?? [];
 ?>
 
 <div class="min-h-screen pt-20 pb-24 md:pl-20 md:pt-4 transition-colors duration-300"
@@ -13,14 +14,15 @@ $users = $model['users'] ?? [];
     <div class="max-w-2xl mx-auto px-4">
 
         <div class="mb-6 relative">
-            <input type="text" placeholder="Cari grup atau teman..."
-                class="w-full rounded-full py-3 px-12 focus:outline-none transition-all border border-transparent focus:border-[var(--accent)] placeholder-opacity-60"
-                style="background-color: var(--secondBg); color: var(--mainText);">
-
+            <form action="/explore" method="post">
+                <input type="text" name="explore" placeholder="Cari grup atau teman..." class="w-full rounded-full py-3 px-12 focus:outline-none transition-all border border-transparent focus:border-[var(--accent)] placeholder-opacity-60" style="background-color: var(--secondBg); color: var(--mainText);">
+            </form>
+            
             <ion-icon name="search-outline" class="absolute left-4 top-1/2 -translate-y-1/2 text-xl"
-                style="color: var(--mainText); opacity: 0.5;"></ion-icon>
+            style="color: var(--mainText); opacity: 0.5;"></ion-icon>
         </div>
-
+        
+        <?php if (!$explore): ?>
         <div class="flex p-1 rounded-full mb-8 relative" style="background-color: var(--secondBg);">
 
             <div id="tab-slider"
@@ -133,7 +135,23 @@ $users = $model['users'] ?? [];
                 <?php endforeach; ?>
             </div>
         </div>
-
+        <?php else: ?>
+        <hr class="my-6">
+        <h2 class="font-bold text-xl mb-4 pl-2 flex items-center gap-2">Hasil Cari</h2>
+        <ul role="list" class="grid gap-x-8 gap-y-12 sm:gap-y-16">
+        <?php foreach ($explore["users_explore"] as $usr): ?>
+            <li>
+                <div class="flex items-center gap-x-6">
+                    <img src="<?= $usr['user_pict'] != "default.jpg" ? $usr['user_pict'] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s' ?>" alt="" class="size-16 rounded-full outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10" />
+                    <div>
+                        <h3 class="text-base/7 font-semibold tracking-tight text-gray-900 dark:text-white"><?= $usr['username'] ?></h3>
+                        <p class="text-sm/6 font-semibold text-indigo-600 dark:text-indigo-400"><?= $usr['user_display'] ?></p>
+                    </div>
+                </div>
+            </li>
+        <?php endforeach ?>
+        </ul>
+        <?php endif ?>
     </div>
 </div>
 

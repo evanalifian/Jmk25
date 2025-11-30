@@ -80,4 +80,18 @@ class UserModel {
     
     return $stmt->rowCount() > 0;
   }
+
+  public static function getExploreUser($chars) {
+        $sql = "SELECT * FROM user 
+                WHERE username LIKE :c 
+                OR user_display LIKE :c
+        ";
+
+        $statement = self::conn()->prepare($sql);
+        $statement->execute([
+            ':c' => "%$chars%"
+        ]);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

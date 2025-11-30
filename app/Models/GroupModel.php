@@ -100,6 +100,18 @@ class GroupModel
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getExploreGroup($chars) {
+        $sql = "SELECT * FROM group WHERE group_name LIKE :c";
+
+        $statement = self::conn()->prepare($sql);
+        $statement->execute([
+            ':c' => "%$chars%"
+        ]);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
     /**
      * FUNGSI KELUAR GRUP
      * Menghapus data member berdasarkan group_id dan user_id

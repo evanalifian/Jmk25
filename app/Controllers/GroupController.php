@@ -153,6 +153,24 @@ class GroupController
 
         View::render("/group/explore", $model);
     }
+
+    public function explore() {
+        $chars = $_POST["explore"];
+        $users = UserModel::getExploreUser($chars);
+        // $groups = GroupModel::getExploreGroup($chars);
+
+        $model = [
+            'title' => 'Temukan',
+            'menus' => [['text' => 'Temukan', 'url' => '#', 'active' => true]],
+            "explore" => [
+                'users_explore' => $users
+                // 'groups_explore' => $groups,
+                ]
+            ];
+
+        View::render("/group/explore", $model);
+    }
+    
     public function join()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
