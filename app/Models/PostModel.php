@@ -11,7 +11,6 @@ class PostModel {
       return Database::getConnectionDB();
   }
 
-  // --- 1. UNTUK HALAMAN HOME & PROFILE (List Banyak Postingan) ---
   public static function getAllPhotoPosts($currentUserId = 0) {
     $sql = "SELECT 
             upload.*, 

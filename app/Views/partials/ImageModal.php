@@ -25,34 +25,26 @@ function openImageModal(imageUrl) {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImageDisplay');
 
-  // Set source gambar di modal sesuai gambar yang diklik
   modalImg.src = imageUrl;
 
-  // Tampilkan modal (hapus class hidden)
   modal.classList.remove('hidden');
 
-  // Matikan scroll pada body agar user tidak scroll halaman belakang
   document.body.style.overflow = 'hidden';
 }
 
-// Fungsi untuk menutup modal
 function closeImageModal() {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImageDisplay');
 
-  // Sembunyikan modal
   modal.classList.add('hidden');
 
-  // Kosongkan src (opsional, agar bersih saat dibuka lagi)
   setTimeout(() => {
     modalImg.src = '';
   }, 200);
 
-  // Hidupkan kembali scroll body
   document.body.style.overflow = 'auto';
 }
 
-// Close modal dengan tombol ESC keyboard
 document.addEventListener('keydown', function(event) {
   if (event.key === "Escape") {
     closeImageModal();

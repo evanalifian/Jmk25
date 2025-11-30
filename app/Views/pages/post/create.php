@@ -47,10 +47,11 @@
         <div class="relative">
           <select name="upload_category_id"
             class="appearance-none block w-full px-4 py-3 bg-transparent text-mainText border border-mainGray rounded-xl focus:outline-none focus:border-mainText cursor-pointer">
-            <option class="bg-mainBg" value="1">Umum</option>
-            <option class="bg-mainBg" value="2">Teknologi</option>
-            <option class="bg-mainBg" value="3">Hobi</option>
-            <option class="bg-mainBg" value="4">Hiburan</option>
+            <?php foreach($model['categories'] as $cat): ?>
+            <option class="bg-mainBg" value="<?= $cat['id_category'] ?>">
+              <?= $cat['category_name'] ?>
+            </option>
+            <?php endforeach; ?>
           </select>
           <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-mainGray">
             <ion-icon name="chevron-down-outline"></ion-icon>

@@ -80,4 +80,5 @@ class UserModel {
     
     return $stmt->rowCount() > 0;
   }
+  
 }

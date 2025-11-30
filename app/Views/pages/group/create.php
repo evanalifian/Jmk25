@@ -5,8 +5,7 @@
   </div>
 
   <div class="flex-1 p-6">
-
-    <form action="/group/create/post" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
 
       <div>
         <label class="block text-sm text-mainText mb-2">Nama Grup</label>
@@ -24,7 +23,7 @@
         <label class="block text-sm font-semibold text-mainText mb-2">Gambar Grup</label>
         <div id="dropzone"
           class="relative border-2 border-dashed border-mainGray rounded-xl p-4 text-center hover:border-accent transition cursor-pointer bg-mainBg overflow-hidden"
-          style="min-height: 200px;"> <input type="file" id="group_pict" name="group_pict" accept="image/*"
+          style="min-height: 200px;"> <input type="file" id="group_pict" name="group_pict" accept="image/*,video/*"
             class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
 
           <div id="upload-indicator"
