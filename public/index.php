@@ -41,8 +41,8 @@ Router::add("GET", "/user/logout", UserController::class, "logout");
 
 
 // Landing page route
-Router::add("GET", "/", HomeController::class, "index", [IsNotAuthMiddleware::class]);
-Router::add("GET", "/landing", LandingPageController::class, "index", [IsNotAuthMiddleware::class]);
+Router::add("GET", "/", LandingPageController::class, "index", [IsAuthMiddleware::class]);
+Router::add("GET", "/dashboard", HomeController::class, "index", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMiddleware::class]);
 // Router::add("GET", "/", HomeController::class, "landing");
 // Router::add("GET", "/([0-9a-zA-Z]*)/id/([0-9a-zA-Z]*)", HomeController::class, "index");

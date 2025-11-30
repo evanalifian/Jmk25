@@ -1,19 +1,29 @@
 <?php
 
-function getConfigDB(): array {
+function getConfigDB(): array
+{
+    $devHost = getenv('DB_HOST') ? getenv('DB_HOST') : 'localhost';
+    $devDb   = getenv('DB_NAME') ? getenv('DB_NAME') : 'jmk25';
+    $devUser = getenv('DB_USER') ? getenv('DB_USER') : 'root';
+    $devPass = getenv('DB_PASS') ? getenv('DB_PASS') : ''; 
+
+
+    $prodHost = getenv('PROD_DB_HOST') ? getenv('PROD_DB_HOST') : 'localhost';
+    $prodDb   = getenv('PROD_DB_NAME') ? getenv('PROD_DB_NAME') : ''; 
+    $prodUser = getenv('PROD_DB_USER') ? getenv('PROD_DB_USER') : ''; 
+    $prodPass = getenv('PROD_DB_PASS') ? getenv('PROD_DB_PASS') : '';
+
     return [
         "database" => [
             "dev" => [
-                // Mengambil nilai dari .env
-                "path" => "mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'),
-                "username" => getenv('DB_USER'),
-                "password" => getenv('DB_PASS')
+                "path" => "mysql:host=" . $devHost . ";dbname=" . $devDb,
+                "username" => $devUser,
+                "password" => $devPass
             ],
             "prod" => [
-                // Biasanya prod punya env sendiri, tapi logikanya sama
-                "path" => "mysql:host=" . getenv('PROD_DB_HOST') . ";dbname=" . getenv('PROD_DB_NAME'),
-                "username" => getenv('PROD_DB_USER'),
-                "password" => getenv('PROD_DB_PASS')
+                "path" => "mysql:host=" . $prodHost . ";dbname=" . $prodDb,
+                "username" => $prodUser,
+                "password" => $prodPass
             ]
         ]
     ];

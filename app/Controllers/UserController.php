@@ -90,7 +90,7 @@ class UserController {
     }
     session_destroy();
     session_unset();
-    View::redirect("/user/signin");
+    View::redirect("/");
   }
   public function follow() {
     // Hanya terima request POST
