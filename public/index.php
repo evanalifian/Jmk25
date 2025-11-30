@@ -44,6 +44,10 @@ Router::add("GET", "/user/logout", UserController::class, "logout");
 // Landing page route
 Router::add("GET", "/", HomeController::class, "index", [IsNotAuthMiddleware::class]);
 Router::add("GET", "/landing", LandingPageController::class, "index", [IsNotAuthMiddleware::class]);
+Router::add("GET", "/dashboard", HomeController::class, "index", [IsNotAuthMiddleware::class]);
+Router::add("GET", "/profile", ProfileController::class, "profile", [IsNotAuthMiddleware::class]);
+// Router::add("GET", "/", HomeController::class, "landing");
+// Router::add("GET", "/([0-9a-zA-Z]*)/id/([0-9a-zA-Z]*)", HomeController::class, "index");
 
 // Post routes
 Router::add("GET", "/upload", PostContentController::class, "index", [IsNotAuthMiddleware::class]);
@@ -71,6 +75,10 @@ Router::add("POST", "/group/kick", GroupController::class, "kickMember");
 //edit user
 Router::add("GET", "/user/edit", EditProfileController::class, "renderEdit", [IsNotAuthMiddleware::class]);
 Router::add("POST", "/user/update", EditProfileController::class, "update", [isNotAuthMiddleware::class]);
+
+// kick member
+// Tambahkan baris ini
+Router::add("POST", "/group/kick", GroupController::class, "kickMember");
 
 // Bookmark route
 Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);

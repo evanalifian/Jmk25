@@ -2,6 +2,7 @@
 
 $groups = $model['groups'] ?? [];
 $users = $model['users'] ?? [];
+
 ?>
 
 <main class="max-w-2xl mx-auto min-h-screen flex flex-col">

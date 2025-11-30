@@ -6,12 +6,11 @@ use Jmk25\App\View;
 class LandingPageController {
   public static function index(){
     $model = [
-      "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
-      "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
-      "hideSidebar" => false
+      "title" => "Selamat Datang di JMK25",
+      "hideSidebar" => true // Opsi tambahan jika ingin menyembunyikan sidebar di view
     ];
-    View::renderLanding("/home/landing", $model);
+    
+    // Pastikan path view ini benar (app/Views/pages/home/landing.php)
+    View::render("/home/landing", $model);
   }
 }
-
-?>

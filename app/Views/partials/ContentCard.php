@@ -29,9 +29,7 @@
       </div>
     </div>
     <div class="flex-grow"></div>
-    <button class="text-mainText hover:bg-blue-500/10 hover:text-blue-500 p-2 rounded-full transition-colors">
-      <ion-icon name="ellipsis-horizontal"></ion-icon>
-    </button>
+    <?php require __DIR__ . '/FollowButton.php'; ?>
   </div>
 
   <p class="text-mainText text-[15px] mb-3 leading-relaxed whitespace-pre-line ">

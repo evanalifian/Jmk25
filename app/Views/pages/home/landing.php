@@ -38,11 +38,11 @@
       </p>
 
       <div class="flex flex-wrap gap-4 pt-6">
-        <a href="/home/dashboard"
+        <a href="/user/signin"
           class="px-8 py-4 rounded-xl bg-mainText text-mainBg font-bold text-lg hover:scale-105 transition-transform shadow-lg">
           Mulai Eksplore
         </a>
-        <a href="#trending"
+        <a href="/user/signin"
           class="px-8 py-4 rounded-xl border-2 border-mainGray bg-transparent text-mainText font-bold text-lg hover:bg-mainGray/10 transition-colors">
           Lihat Trending
         </a>
@@ -61,7 +61,7 @@
         <h2 class="text-3xl md:text-4xl font-black text-mainText">Lagi Rame</h2>
         <p class="text-lg text-mainText/60 mt-2">Meme yang bikin satu kampus geger hari ini.</p>
       </div>
-      <a href="/home/dashboard" class="hidden md:flex items-center gap-2 text-accent font-bold text-lg hover:underline">
+      <a href="/user/signin" class="hidden md:flex items-center gap-2 text-accent font-bold text-lg hover:underline">
         Lihat Semua <ion-icon name="arrow-forward"></ion-icon>
       </a>
     </div>
@@ -115,7 +115,7 @@
     </div>
 
     <div class="mt-12 text-center md:hidden">
-      <a href="/home/dashboard" class="inline-flex items-center gap-2 text-accent font-bold text-lg hover:underline">
+      <a href="/user/signin" class="inline-flex items-center gap-2 text-accent font-bold text-lg hover:underline">
         Lihat Semua <ion-icon name="arrow-forward"></ion-icon>
       </a>
     </div>
@@ -191,7 +191,7 @@
           Jangan cuma disimpen di galeri HP. Upload sekarang dan jadilah legenda kampus!
         </p>
         <div class="pt-4">
-          <a href="/home/dashboard"
+          <a href="/user/signin"
             class="inline-block px-12 py-5 rounded-full bg-accent text-mainBg font-bold text-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
             Upload Meme Sekarang
           </a>

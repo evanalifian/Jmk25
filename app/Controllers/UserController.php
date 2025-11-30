@@ -74,7 +74,7 @@ class UserController {
           "login" => true,
           "id_user" => $id_user,
         ];
-        View::redirect("/");
+        View::redirect("/dashboard");
       }
     } catch (ValidationException $err) {
       View::render("user/signin", [
@@ -90,7 +90,7 @@ class UserController {
     }
     session_destroy();
     session_unset();
-    View::redirect("/user/signin");
+    View::redirect("/");
   }
   public function follow() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -103,13 +103,24 @@ class UserController {
         if ($myId != 0 && $targetId != 0 && $myId != $targetId) {
             $success = UserModel::followUser($myId, $targetId);
             
-            if ($success) {
-                echo json_encode(['status' => 'success', 'message' => 'Berhasil mengikuti']);
+            // 1. Cek dulu status sekarang
+            $isFollowing = UserModel::isFollowing($myId, $targetId);
+
+            if ($isFollowing) {
+                // 2. Jika sudah follow -> Lakukan UNFOLLOW
+                $success = UserModel::unfollowUser($myId, $targetId);
+                $newStatus = 'unfollowed';
+                $message = 'Berhenti mengikuti';
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Sudah mengikuti']);
+                // 3. Jika belum follow -> Lakukan FOLLOW
+                $success = UserModel::followUser($myId, $targetId);
+                $newStatus = 'followed';
+                $message = 'Mulai mengikuti';
             }
+            
+            echo json_encode(['status' => 'success', 'action' => $newStatus, 'message' => $message]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid ID']);
+            echo json_encode(['status' => 'error', 'message' => 'Gagal memproses']);
         }
         exit; 
     }
