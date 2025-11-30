@@ -23,7 +23,7 @@ class BookmarkController {
         }
 
         try {
-            $action = BookmarkModel::toggleBookmark($userId, $uploadId); // Panggil toggleMark
+            $action = BookmarkModel::toggleBookmark($userId, $uploadId);
 
             echo json_encode([
                 'status' => 'success',
@@ -45,16 +45,16 @@ class BookmarkController {
         
         $currentUsername = $_SESSION['login']['username'] ?? 'User';
         $model = [
-            "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
-            "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
-            "data" => $marks,
-            "username" => $currentUsername,
-            "menus" => [
-                [ "text" => "Tersimpan", 
-                "url" => "/bookmark",
-                "active" => true]
-            ],
-            "hideSidebar" => false
+        "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
+        "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
+        "data" => $marks,
+        "username" => $currentUsername,
+        "menus" => [
+        [ "text" => "Tersimpan", 
+          "url" => "/bookmark",
+          "active" => true]
+        ],
+        "hideSidebar" => false
         ];
         
         View::render("/bookmark/index", $model);

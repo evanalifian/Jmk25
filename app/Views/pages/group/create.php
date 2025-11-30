@@ -30,7 +30,7 @@
             class="flex flex-col items-center justify-center text-mainGray/70 absolute inset-0 p-8">
             <ion-icon name="images-outline" class="text-4xl text-mainGray mb-3"></ion-icon>
             <p class="font-medium text-mainText">Klik untuk unggah</p>
-            <p class="text-sm text-mainGray">atau *drag and drop*</p>
+            <p class="text-sm text-mainGray">atau drag and drop</p>
           </div>
 
           <img id="preview-image" class="absolute inset-0 w-full h-full object-cover rounded-lg hidden">
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function highlight() {
-    dropzone.classList.add('bg-accent/5'); // Efek highlight saat drag
+    dropzone.classList.add('bg-accent/5');
     dropzone.classList.add('border-accent');
   }
 

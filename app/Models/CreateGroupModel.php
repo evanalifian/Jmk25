@@ -1,5 +1,4 @@
 <?php 
-// File: CreateGroupModel.php
 
 namespace Jmk25\Models;
 
