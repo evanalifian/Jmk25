@@ -154,12 +154,14 @@ function closeModal() {
   }
 
   setTimeout(() => {
-    if (window.history.length > 1) {
+    const myDomain = window.location.host;
+    const previousPage = document.referrer;
+    if (previousPage && previousPage.includes(myDomain)) {
       window.history.back();
     } else {
-      window.location.href = '/';
+      window.location.replace("/");
     }
-  }, 50) // Delay dikit buat animasi
+  }, 50)
 }
 </script>
 

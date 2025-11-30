@@ -49,7 +49,7 @@ class CommentController {
                  CommentModel::createComment($userId, $uploadId, $commentText);
              }
 
-             header("Location: /comment/" . $uploadId);
+             header("Location: /" . $uploadId);
              exit;
         }
     }

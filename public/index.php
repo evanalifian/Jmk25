@@ -80,7 +80,7 @@ Router::add("GET", "/bookmark", BookmarkController::class, "index", [IsNotAuthMi
 Router::add("POST", "/like/toggle", LikesController::class, "toggle", [IsNotAuthMiddleware::class]);
 
 // comments
-Router::add('GET', '/comment/([0-9]+)', CommentController::class, 'index');
+Router::add('GET', '/([0-9]+)', CommentController::class, 'index');
 Router::add('POST', '/comment/store', CommentController::class, 'store');
 
 // profile

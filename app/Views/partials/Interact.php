@@ -146,7 +146,7 @@ if (!window.interactFunctionsDefined) {
     const postId = btn.getAttribute('data-id');
 
     if (postId) {
-      window.location.href = '/comment/' + postId;
+      window.location.href = postId;
     } else {
       console.error("ID Postingan tidak ditemukan!");
     }
