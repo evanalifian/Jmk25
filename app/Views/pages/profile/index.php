@@ -22,13 +22,10 @@
               if (empty($fotoDb) || $fotoDb === 'default.jpg') {
                   $srcGambar = '/assets/default.png';
               } else {
-                  $srcGambar = '/assets/' . htmlspecialchars($fotoDb);
+                  $srcGambar = '/upload/profile/' . htmlspecialchars($fotoDb);
               }
             ?>
             <img src="<?= $srcGambar; ?>" class="w-full h-full object-cover scale-150" alt="Profile Pict">
-          </div>
-          <div>
-            <a href="/user/edit">gas edit</a>
           </div>
           <div class="flex-1 flex flex-col">
 
@@ -39,10 +36,9 @@
                 </h2>
                 <p class="text-sm text-mainGray">@<?= htmlspecialchars($profileUser['username']) ?></p>
               </div>
-
-              <button class="p-1 rounded-full hover:bg-mainGray/10 text-mainText transition-colors">
+              <a href="/edit" class="p-1 rounded-full hover:bg-mainGray/10 text-mainText transition-colors">
                 <ion-icon name="settings-outline" class="text-xl"></ion-icon>
-              </button>
+              </a>
             </div>
 
             <p class="mt-2 text-[13px] text-mainText leading-snug">

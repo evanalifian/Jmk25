@@ -31,6 +31,7 @@ use Jmk25\Controllers\CreateGroupController;
 use Jmk25\Controllers\LandingPageController;
 use Jmk25\Controllers\LikesController;
 use Jmk25\Controllers\GroupController;
+use Jmk25\Controllers\EditUserController;
 
 
 // User path routes
@@ -71,8 +72,8 @@ Router::add("POST", "/group/create/post", CreateGroupController::class, "postCre
 Router::add("POST", "/group/kick", GroupController::class, "kickMember");
 
 //edit user
-Router::add("GET", "/user/edit", UserController::class, "renderEdit");
-Router::add("POST", "/user/update", UserController::class, "update");
+Router::add("GET", "/edit", EditUserController::class, "renderEdit");
+Router::add("POST", "/update", EditUserController::class, "update");
 
 // Bookmark route
 Router::add("POST", "/bookmark/toggle", BookmarkController::class, "toggle", [IsNotAuthMiddleware::class]);

@@ -20,7 +20,7 @@
 
         <div class="bg-secondBg p-8 rounded-3xl shadow-lg border border-mainGray/10">
             
-            <form action="/user/update" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="/update" method="POST" enctype="multipart/form-data" class="space-y-6">
                 
                 <div class="flex flex-col items-center justify-center mb-6">
                     <div class="relative group cursor-pointer">
@@ -50,7 +50,7 @@
                     <label class="block text-sm font-bold text-mainText mb-2 ml-1">Bio</label>
                     <textarea name="user_bio" rows="3"
                         class="w-full bg-mainBg border border-mainGray/30 rounded-xl px-4 py-3 text-mainText focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none placeholder-mainGray/50"
-                        placeholder="Ceritakan sedikit tentang diri Anda..."><?= htmlspecialchars($user['user_bio'] ?? '') ?></textarea>
+                        placeholder="Ceritakan sedikit tentang diri Anda..." maxlength="50"><?= htmlspecialchars($user['user_bio'] ?? '') ?></textarea>
                 </div>
 
                 <div class="border-t border-mainGray/20 my-6"></div>

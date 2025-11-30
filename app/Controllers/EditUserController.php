@@ -5,6 +5,7 @@ namespace Jmk25\Controllers;
 use Jmk25\App\View;
 use Jmk25\Models\EditProfileModel;
 
+
 class EditUserController
 {
     public function renderEdit()
@@ -24,7 +25,14 @@ class EditUserController
 
         $model = [
             'title' => 'Edit Profil',
-            'user' => $user
+            'user' => $user,
+            'menus' => [
+                [
+                    'text' => 'Edit Profil',
+                    'url' => '#',
+                    'active' => true
+                ]
+            ]
         ];
 
         View::render("/user/edit", $model);
@@ -35,13 +43,26 @@ class EditUserController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (session_status() == PHP_SESSION_NONE) session_start();
-            $userId = $_SESSION['login']['id_user'];
-
+            
             $displayName = $_POST['user_display'];
             $bio = $_POST['user_bio'];
-            
-            
+            $newPict = null;
 
+            // Logika Upload Foto
+            if (isset($_FILES['user_pict']) && $_FILES['user_pict']['error'] === 0) {
+                // Buat nama unik
+                $fileName = time() . '_' . $_FILES['user_pict']['name'];
+                $uploadPath = __DIR__ . '/../../public/upload/profile/' . $fileName;
+                
+                if(move_uploaded_file($_FILES['user_pict']['tmp_name'], $uploadPath)) {
+                    $newPict = $fileName;
+                }
+            }
+
+            // Panggil Model untuk UPDATE database
+            EditProfileModel::UpdateUserProfile($displayName, $bio, $newPict);
+
+            // Redirect balik ke halaman profil
             header("Location: /profile");
             exit;
         }

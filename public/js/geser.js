@@ -150,3 +150,26 @@ function previewImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function updateCount(textarea) {
+    const maxLength = 50;
+    const currentLength = textarea.value.length;
+    const counterElement = document.getElementById('bio-counter');
+    
+    counterElement.textContent = `${currentLength}/${maxLength}`;
+
+    // Ubah warna jadi merah jika sudah maksimal
+    if (currentLength >= maxLength) {
+        counterElement.classList.add('text-red-500');
+        counterElement.classList.remove('text-mainGray');
+    } else {
+        counterElement.classList.remove('text-red-500');
+        counterElement.classList.add('text-mainGray');
+    }
+}
+
+// Jalankan fungsi saat halaman dimuat (untuk menghitung bio lama)
+document.addEventListener("DOMContentLoaded", function() {
+    const bioInput = document.getElementById('user_bio');
+    if(bioInput) updateCount(bioInput);
+});
