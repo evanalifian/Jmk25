@@ -15,17 +15,14 @@ class LikesModel {
         $db = self::conn();
 
         try {
-            // 1. Cek apakah user sudah like?
             $checkStmt = $db->prepare("SELECT id_like FROM `like` WHERE like_user_id = ? AND like_upload_id = ?");
             $checkStmt->execute([$userId, $uploadId]);
             
             if ($checkStmt->rowCount() > 0) {
-                // SUDAH LIKE -> HAPUS (UNLIKE)
                 $deleteStmt = $db->prepare("DELETE FROM `like` WHERE like_user_id = ? AND like_upload_id = ?");
                 $deleteStmt->execute([$userId, $uploadId]);
                 return 'unliked'; 
             } else {
-                // BELUM LIKE -> SIMPAN (LIKE)
                 $insertStmt = $db->prepare("INSERT INTO `like` (like_user_id, like_upload_id) VALUES (?, ?)");
                 $insertStmt->execute([$userId, $uploadId]);
                 return 'liked'; 

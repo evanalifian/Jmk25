@@ -27,7 +27,6 @@
             ?>
             <img src="<?= $srcGambar; ?>" class="w-full h-full object-cover scale-150" alt="Profile Pict">
           </div>
-
           <div class="flex-1 flex flex-col">
 
             <div class="flex justify-between items-start">
@@ -38,9 +37,27 @@
                 <p class="text-sm text-mainGray">@<?= htmlspecialchars($profileUser['username']) ?></p>
               </div>
 
-              <button class="p-1 rounded-full hover:bg-mainGray/10 text-mainText transition-colors">
-                <ion-icon name="settings-outline" class="text-xl"></ion-icon>
-              </button>
+              <div class="flex gap-2">
+                <?php if ($model['isOwnProfile']): ?>
+                <button class="p-1 rounded-full hover:bg-mainGray/10 text-mainText transition-colors"
+                  onclick="window.location='/user/edit'">
+                  <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+                </button>
+
+                <?php else: ?>
+                <?php if ($model['isFollowing']): ?>
+                <button
+                  class="px-4 py-1.5 text-xs font-bold border border-mainGray text-mainText rounded-full hover:bg-red-500 hover:border-red-500 hover:text-white transition-all">
+                  Unfollow
+                </button>
+                <?php else: ?>
+                <button onclick="handleFollow(this, '<?= $usr['id'] ?>')" class=" px-4 py-1.5 text-xs font-bold bg-white text-black rounded-full hover:opacity-90
+                  transition-all">
+                  Follow
+                </button>
+                <?php endif; ?>
+                <?php endif; ?>
+              </div>
             </div>
 
             <p class="mt-2 text-[13px] text-mainText leading-snug">
@@ -52,14 +69,16 @@
                 <span class="font-bold"><?= count($postUser) ?></span>
                 <span class="opacity-60">Post</span>
               </div>
-              <div class="cursor-pointer hover:underline flex gap-1">
+              <button onclick="openFollowsModal('following', '<?= $profileUser['username'] ?>')"
+                class="cursor-pointer hover:underline flex gap-1">
                 <span class="font-bold"><?= $profileUser['total_following'] ?? 0; ?></span>
                 <span class="opacity-60">Following</span>
-              </div>
-              <div class="cursor-pointer hover:underline flex gap-1">
+              </button>
+              <button onclick="openFollowsModal('followers', '<?= $profileUser['username'] ?>')"
+                class="cursor-pointer hover:underline flex gap-1">
                 <span class="font-bold"><?= $profileUser['total_followers'] ?? 0; ?></span>
                 <span class="opacity-60">Followers</span>
-              </div>
+              </button>
             </div>
 
           </div>
@@ -77,7 +96,7 @@
 
           <?php if ($postUser): ?>
 
-          <?php foreach ($model["data"] as $post): ?>
+          <?php foreach ($model["dataPost"] as $post): ?>
 
           <?php require __DIR__ . '/../../partials/ContentCard.php'; ?>
 

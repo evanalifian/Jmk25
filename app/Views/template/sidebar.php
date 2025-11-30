@@ -6,7 +6,7 @@ if(isset($_SESSION['login']['id_user'])) {
 }
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$isHomeActive = ($currentPath === '/' || $currentPath === '/index.php'); // Check if it's the home path
+$isHomeActive = ($currentPath === '/' || $currentPath === '/index.php');
 
 function getIconName($path, $name, $currentPath)
 {
@@ -36,19 +36,20 @@ function getIconName($path, $name, $currentPath)
       </ion-icon>
     </a>
 
-    <a href="/group/group_display" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
-      <ion-icon name="<?= getIconName('/group/group_display', 'people', $currentPath); ?>"
+
+    <a href="/group" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+      <ion-icon name="<?= getIconName('/group', 'people', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
     <a href="/explore" id="nav-search" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
-      <ion-icon name="<?= getIconName('/explore', 'search', $currentPath); ?>"
+      <ion-icon name="<?= getIconName('/search', 'search', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
-    <a href="/create" id="nav-add" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="/upload" id="nav-add" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/create', 'add-circle', $currentPath); ?>"
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>

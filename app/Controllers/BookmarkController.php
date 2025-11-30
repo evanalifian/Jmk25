@@ -7,7 +7,6 @@ use Jmk25\Models\BookmarkModel;
 
 class BookmarkController {
     
-    // Metode untuk toggle mark (mark/unmark)
     public function toggle() {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -35,7 +34,6 @@ class BookmarkController {
         }
     } 
     
-    // Metode untuk melihat mark user yang sedang login (/mark)
     public function index() {
         if (session_status() === PHP_SESSION_NONE) session_start();
         if (!isset($_SESSION['login']['id_user'])) {
@@ -47,16 +45,16 @@ class BookmarkController {
         
         $currentUsername = $_SESSION['login']['username'] ?? 'User';
         $model = [
-        "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
-        "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
-        "data" => $marks,
-        "username" => $currentUsername,
-        "menus" => [
-        [ "text" => "Tersimpan", 
-          "url" => "/bookmark",
-          "active" => true]
-        ],
-        "hideSidebar" => false
+            "title" => "Selamat Datang di JMK25 | Post Your Best Meme awokawok.",
+            "description" => "Website untuk memposting meme shitpost di lengkungan kampus.",
+            "data" => $marks,
+            "username" => $currentUsername,
+            "menus" => [
+                [ "text" => "Tersimpan", 
+                "url" => "/bookmark",
+                "active" => true]
+            ],
+            "hideSidebar" => false
         ];
         
         View::render("/bookmark/index", $model);

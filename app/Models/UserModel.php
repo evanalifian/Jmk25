@@ -80,9 +80,5 @@ class UserModel {
     
     return $stmt->rowCount() > 0;
   }
-  public static function unfollowUser($followerId, $followingId) {
-    $sql = "DELETE FROM follow WHERE follow_id_followers = ? AND follow_id_following = ?";
-    $stmt = self::conn()->prepare($sql);
-    return $stmt->execute([$followerId, $followingId]);
-  }
+  
 }

@@ -23,13 +23,7 @@
 
     </button>
 
-    <a href="/settings"
-      class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-      <ion-icon name="settings-outline" class="text-xl text-gray-500 dark:text-gray-400"></ion-icon>
-      <span class="text-sm font-medium">Pengaturan</span>
-    </a>
-
-    <a href="/create-grup"
+    <a href="/group/create"
       class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
       <ion-icon name="add-circle-outline" class="text-xl text-gray-500 dark:text-gray-400"></ion-icon>
       <span class="text-sm font-medium">Buat Grup</span>

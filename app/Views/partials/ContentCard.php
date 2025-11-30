@@ -14,12 +14,12 @@
     </div>
 
     <div class="flex flex-col leading-tight">
-      <div class="flex items-center gap-1">
+      <button onclick="window.location.href='/<?= htmlspecialchars($post['username']); ?>'" class=" flex items-center
+        gap-1">
         <p class="font-bold text-mainText text-sm hover:underline cursor-pointer">
           <?= htmlspecialchars($post['user_display'] ?? $post['username']); ?>
         </p>
-        <ion-icon name="checkmark-circle" class="text-blue-500 text-sm"></ion-icon>
-      </div>
+      </button>
       <div class="flex items-center gap-1 text-xs text-gray-500">
         <p>@<?= strtolower(htmlspecialchars($post['username'])); ?></p>
         <span class="text-[10px]">•</span>
