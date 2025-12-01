@@ -195,7 +195,7 @@ class GroupController
                 GroupModel::leaveGroup($groupId, $userId);
             }
 
-            header("Location: /group/group_display?id=" . $groupId);
+            header("Location: /group?id=" . $groupId);
             exit;
         }
     }
@@ -218,7 +218,7 @@ class GroupController
                 }
             }
 
-            header("Location: /group/group_display?id=" . $groupId);
+            header("Location: /group?id=" . $groupId);
             exit;
         }
     }

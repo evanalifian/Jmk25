@@ -97,6 +97,8 @@ class GroupModel
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    
+
 
     /**
      * FUNGSI KELUAR GRUP
