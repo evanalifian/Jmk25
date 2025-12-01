@@ -95,6 +95,63 @@ function handleFollow(btn, userId) {
     });
 }
 
+function toggleFollowExplore(btn, targetUserId) {
+    // 1. Efek Loading (Meredup sedikit)
+    btn.style.opacity = "0.7";
+    btn.style.pointerEvents = "none"; // Cegah klik ganda
+
+    const formData = new FormData();
+    formData.append('user_id', targetUserId);
+
+    fetch('/user/follow', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Kembalikan tombol ke kondisi bisa diklik
+        btn.style.opacity = "1";
+        btn.style.pointerEvents = "auto";
+
+        if (data.status === 'success') {
+            
+            // Ambil elemen span text di dalam tombol
+            const spanFollow = btn.querySelector('.text-follow');
+            const spanFollowed = btn.querySelector('.text-followed');
+
+            if (data.action === 'followed') {
+                // --- JADI FOLLOWED (BIRU) ---
+                
+                // Ubah Warna Tombol
+                btn.style.backgroundColor = "var(--accent)";
+                btn.style.borderColor = "var(--accent)";
+                btn.style.color = "white";
+
+                // Ubah Teks
+                if(spanFollow) spanFollow.classList.add('hidden');
+                if(spanFollowed) spanFollowed.classList.remove('hidden');
+
+            } else {
+                // --- JADI UNFOLLOW (TRANSPARAN) ---
+
+                // Balikin Warna Tombol
+                btn.style.backgroundColor = "transparent";
+                btn.style.borderColor = "var(--mainGray)";
+                btn.style.color = "var(--mainText)";
+
+                // Ubah Teks
+                if(spanFollowed) spanFollowed.classList.add('hidden');
+                if(spanFollow) spanFollow.classList.remove('hidden');
+            }
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        btn.style.opacity = "1";
+        btn.style.pointerEvents = "auto";
+    });
+}
+
 function handleJoin(btn, groupId) {
     // 1. Efek Loading
     const originalText = btn.innerText;

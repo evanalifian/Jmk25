@@ -94,5 +94,11 @@ class UserModel {
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+  // Tambahkan ini di dalam class UserModel
+  public static function unfollowUser($followerId, $followingId) {
+    $sql = "DELETE FROM follow WHERE follow_id_followers = ? AND follow_id_following = ?";
+    $stmt = self::conn()->prepare($sql);
+    return $stmt->execute([$followerId, $followingId]);
+  }
 
 }

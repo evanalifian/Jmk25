@@ -98,11 +98,9 @@ class UserController {
         
         if (session_status() == PHP_SESSION_NONE) session_start();
         $myId = $_SESSION['login']['id_user'] ?? 0;
-
         $targetId = $_POST['user_id'] ?? 0;
 
         if ($myId != 0 && $targetId != 0 && $myId != $targetId) {
-            $success = UserModel::followUser($myId, $targetId);
             
             // 1. Cek dulu status sekarang
             $isFollowing = UserModel::isFollowing($myId, $targetId);
@@ -123,7 +121,7 @@ class UserController {
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Gagal memproses']);
         }
-        exit; 
+        exit;
     }
   }
 }
