@@ -11,26 +11,15 @@ class GroupModel
         return Database::getConnectionDB();
     }
 
-    /**
-     * Mengambil Semua Grup (Untuk Halaman Explore)
-     * Mengambil: ID, Nama, Foto, Deskripsi
-     */
     public static function getAllGroups()
     {
-        // PENTING: Kata 'group' adalah reserved word di SQL, 
-        // jadi harus diapit tanda backtick (`) seperti `group`
         $sql = "SELECT id_group, group_name, group_pict, group_desc FROM `group` ORDER BY group_created_at DESC";
         
         $statement = self::conn()->prepare($sql);
         $statement->execute();
 
-        // Mengembalikan hasil dalam bentuk Array Associative
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-    /**
-     * Mengambil Detail 1 Grup berdasarkan ID (Untuk Halaman Detail)
-     */
     public static function getGroupById($id)
     {
         $sql = "SELECT * FROM `group` WHERE id_group = ?";
@@ -54,9 +43,7 @@ class GroupModel
                     content_video.video_url
                 FROM upload
                 JOIN user ON upload.upload_user_id = user.id
-                -- Join ke tabel Foto (Gunakan LEFT JOIN agar post tanpa foto tetap muncul)
                 LEFT JOIN content_foto ON upload.id_upload = content_foto.id_upload
-                -- Join ke tabel Video
                 LEFT JOIN content_video ON upload.id_upload = content_video.id_upload
                 WHERE upload.upload_group_id = ?
                 ORDER BY upload.upload_created_at DESC";
@@ -83,7 +70,6 @@ class GroupModel
         $statement = self::conn()->prepare($sql);
         $statement->execute([$groupId, $userId]);
 
-        // Jika ada data, berarti sudah join
         return $statement->rowCount() > 0;
     }
 
@@ -99,6 +85,20 @@ class GroupModel
         $statement->execute([$groupId]);
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function getExploreGroup($chars) {
+        $sql = "SELECT * FROM group WHERE group_name LIKE :c";
+
+        $statement = self::conn()->prepare($sql);
+        $statement->execute([
+            ':c' => "%$chars%"
+        ]);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    
+
 
     /**
      * FUNGSI KELUAR GRUP

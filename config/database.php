@@ -5,9 +5,9 @@ function getConfigDB(): array {
         "database" => [
             "dev" => [
                 // Mengambil nilai dari .env
-                "path" => "mysql:host=localhost:3306;dbname=jmk25",
-                "username" => "root",
-                "password" => ""
+                "path" => "mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'),
+                "username" => getenv('DB_USER'),
+                "password" => getenv('DB_PASS')
             ],
             "prod" => [
                 // Biasanya prod punya env sendiri, tapi logikanya sama

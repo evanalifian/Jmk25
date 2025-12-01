@@ -7,7 +7,7 @@ class IsAuthMiddleware implements Middleware {
     session_start();
 
     if (isset($_SESSION["login"]) && $_SESSION["login"] == true) {
-      header("Location: /");
+      header("Location: /dashboard");
       exit;
     }
   }

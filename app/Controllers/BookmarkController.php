@@ -7,7 +7,6 @@ use Jmk25\Models\BookmarkModel;
 
 class BookmarkController {
     
-    // Metode untuk toggle mark (mark/unmark)
     public function toggle() {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -24,7 +23,7 @@ class BookmarkController {
         }
 
         try {
-            $action = BookmarkModel::toggleBookmark($userId, $uploadId); // Panggil toggleMark
+            $action = BookmarkModel::toggleBookmark($userId, $uploadId);
 
             echo json_encode([
                 'status' => 'success',
@@ -35,7 +34,6 @@ class BookmarkController {
         }
     } 
     
-    // Metode untuk melihat mark user yang sedang login (/mark)
     public function index() {
         if (session_status() === PHP_SESSION_NONE) session_start();
         if (!isset($_SESSION['login']['id_user'])) {

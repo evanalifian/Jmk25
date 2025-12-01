@@ -80,4 +80,25 @@ class UserModel {
     
     return $stmt->rowCount() > 0;
   }
+
+  public static function getExploreUser($chars) {
+        $sql = "SELECT * FROM user 
+                WHERE username LIKE :c 
+                OR user_display LIKE :c
+        ";
+
+        $statement = self::conn()->prepare($sql);
+        $statement->execute([
+            ':c' => "%$chars%"
+        ]);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+  // Tambahkan ini di dalam class UserModel
+  public static function unfollowUser($followerId, $followingId) {
+    $sql = "DELETE FROM follow WHERE follow_id_followers = ? AND follow_id_following = ?";
+    $stmt = self::conn()->prepare($sql);
+    return $stmt->execute([$followerId, $followingId]);
+  }
+
 }

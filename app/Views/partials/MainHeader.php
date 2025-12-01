@@ -1,6 +1,6 @@
 <?php 
     $menus = $model['menus'] ?? [];
-    $currentMenu = $menus[0]; 
+    $currentMenu = $menus[0] ?? ['text' => 'Menu', 'url' => '#', 'active' => false]; 
     
     foreach ($menus as $menu) {
         if (isset($menu['active']) && $menu['active'] === true) {
@@ -11,12 +11,22 @@
     
     $menuCount = count($menus);
     $isDropdownDisabled = ($menuCount <= 1);
+
+    $currentPath = strtok($_SERVER['REQUEST_URI'], '?');
+    
+    $showBackButton = ($currentPath !== '/' && $currentPath !== '/index.php');
 ?>
 
 <header class="sticky top-0 z-50 w-full bg-mainBg/90 backdrop-blur-md transition-colors duration-300">
 
-  <div class="flex items-center justify-center h-16 relative max-w-2xl mx-auto">
+  <div class="flex items-center justify-center h-16 relative max-w-2xl mx-auto px-4">
 
+    <?php if ($showBackButton): ?>
+    <a href="javascript:history.back()"
+      class="absolute left-4 w-10 h-10 rounded-full flex items-center justify-center hover:bg-mainGray/20 transition-colors cursor-pointer text-mainText">
+      <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+    </a>
+    <?php endif; ?>
     <div id="dropdownButton" class="group flex items-center gap-2 px-4 py-2 rounded-full transition-all cursor-pointer select-none 
       <?= $isDropdownDisabled ? 'pointer-events-none' : 'hover:bg-mainGray/20' ?>">
 
@@ -52,11 +62,6 @@
       </div>
     </div>
     <?php endif; ?>
-
-    <div
-      class="absolute right-4 w-5 h-5 flex items-center justify-center text-mainGray/60 border border-mainGray rounded-full hover:bg-mainGray/20 hover:text-mainText transition-colors cursor-pointer">
-      <ion-icon name="ellipsis-horizontal" class="text-sm"></ion-icon>
-    </div>
 
   </div>
 </header>

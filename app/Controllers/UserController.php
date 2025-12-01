@@ -74,7 +74,7 @@ class UserController {
           "login" => true,
           "id_user" => $id_user,
         ];
-        View::redirect("/");
+        View::redirect("/dashboard");
       }
     } catch (ValidationException $err) {
       View::render("user/signin", [
@@ -90,33 +90,38 @@ class UserController {
     }
     session_destroy();
     session_unset();
-    View::redirect("/user/signin");
+    View::redirect("/landing");
+
   }
   public function follow() {
-    // Hanya terima request POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
-        // Ambil ID user yang login (Follower)
-        // Pastikan session sudah start dan key-nya benar
         if (session_status() == PHP_SESSION_NONE) session_start();
-        $myId = $_SESSION['login']['id_user'] ?? 0; // Sesuaikan dengan key session login Anda (misal: 'id' atau 'id_user')
-
-        // Ambil ID user yang mau difollow (Following) dari data yang dikirim JS
+        $myId = $_SESSION['login']['id_user'] ?? 0;
         $targetId = $_POST['user_id'] ?? 0;
 
         if ($myId != 0 && $targetId != 0 && $myId != $targetId) {
-            // Panggil Model
-            $success = \Jmk25\Models\UserModel::followUser($myId, $targetId);
             
-            if ($success) {
-                echo json_encode(['status' => 'success', 'message' => 'Berhasil mengikuti']);
+            // 1. Cek dulu status sekarang
+            $isFollowing = UserModel::isFollowing($myId, $targetId);
+
+            if ($isFollowing) {
+                // 2. Jika sudah follow -> Lakukan UNFOLLOW
+                $success = UserModel::unfollowUser($myId, $targetId);
+                $newStatus = 'unfollowed';
+                $message = 'Berhenti mengikuti';
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Sudah mengikuti']);
+                // 3. Jika belum follow -> Lakukan FOLLOW
+                $success = UserModel::followUser($myId, $targetId);
+                $newStatus = 'followed';
+                $message = 'Mulai mengikuti';
             }
+            
+            echo json_encode(['status' => 'success', 'action' => $newStatus, 'message' => $message]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid ID']);
+            echo json_encode(['status' => 'error', 'message' => 'Gagal memproses']);
         }
-        exit; // PENTING: Stop script agar tidak me-render view apapun
+        exit;
     }
   }
 }

@@ -7,7 +7,7 @@ class IsNotAuthMiddleware implements Middleware {
     session_start();
 
     if (!isset($_SESSION["login"])) {
-      header("Location: /user/signin");
+      header("Location: /landing");
       exit;
     }
   }

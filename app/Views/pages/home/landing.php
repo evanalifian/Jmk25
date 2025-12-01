@@ -1,3 +1,21 @@
+<header
+    class="sticky top-0 z-50 w-full bg-mainBg/80 backdrop-blur-xl border-b border-mainGray transition-colors duration-300">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+
+      <a href="/" class="group relative">
+        <img src="/assets/logo.png" class="w-32 md:w-36 hover:opacity-80 transition-opacity block dark:hidden"
+          alt="Logo JMK25 Light">
+        <img src="/assets/logowhite.png" class="w-32 md:w-36 hover:opacity-80 transition-opacity hidden dark:block"
+          alt="Logo JMK25 Dark">
+      </a>
+
+      <a href="/user/signin"
+        class="px-8 py-2.5 rounded-xl font-bold border-2 border-mainGray text-mainText hover:bg-accent hover:text-mainBg hover:border-accent transition-all duration-300">
+        Login
+      </a>
+
+    </nav>
+  </header>
 <section class="relative w-full bg-mainBg text-mainText py-28 overflow-hidden">
 
   <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none">
@@ -38,11 +56,11 @@
       </p>
 
       <div class="flex flex-wrap gap-4 pt-6">
-        <a href="/home/dashboard"
+        <a href="/user/signin"
           class="px-8 py-4 rounded-xl bg-mainText text-mainBg font-bold text-lg hover:scale-105 transition-transform shadow-lg">
           Mulai Eksplore
         </a>
-        <a href="#trending"
+        <a href="/user/signin"
           class="px-8 py-4 rounded-xl border-2 border-mainGray bg-transparent text-mainText font-bold text-lg hover:bg-mainGray/10 transition-colors">
           Lihat Trending
         </a>
@@ -61,7 +79,7 @@
         <h2 class="text-3xl md:text-4xl font-black text-mainText">Lagi Rame</h2>
         <p class="text-lg text-mainText/60 mt-2">Meme yang bikin satu kampus geger hari ini.</p>
       </div>
-      <a href="/home/dashboard" class="hidden md:flex items-center gap-2 text-accent font-bold text-lg hover:underline">
+      <a href="/user/signin" class="hidden md:flex items-center gap-2 text-accent font-bold text-lg hover:underline">
         Lihat Semua <ion-icon name="arrow-forward"></ion-icon>
       </a>
     </div>
@@ -115,7 +133,7 @@
     </div>
 
     <div class="mt-12 text-center md:hidden">
-      <a href="/home/dashboard" class="inline-flex items-center gap-2 text-accent font-bold text-lg hover:underline">
+      <a href="/user/signin" class="inline-flex items-center gap-2 text-accent font-bold text-lg hover:underline">
         Lihat Semua <ion-icon name="arrow-forward"></ion-icon>
       </a>
     </div>
@@ -191,7 +209,7 @@
           Jangan cuma disimpen di galeri HP. Upload sekarang dan jadilah legenda kampus!
         </p>
         <div class="pt-4">
-          <a href="/home/dashboard"
+          <a href="/user/signin"
             class="inline-block px-12 py-5 rounded-full bg-accent text-mainBg font-bold text-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
             Upload Meme Sekarang
           </a>

@@ -14,12 +14,12 @@
     </div>
 
     <div class="flex flex-col leading-tight">
-      <div class="flex items-center gap-1">
+      <button onclick="window.location.href='/<?= htmlspecialchars($post['username']); ?>'" class=" flex items-center
+        gap-1">
         <p class="font-bold text-mainText text-sm hover:underline cursor-pointer">
           <?= htmlspecialchars($post['user_display'] ?? $post['username']); ?>
         </p>
-        <ion-icon name="checkmark-circle" class="text-blue-500 text-sm"></ion-icon>
-      </div>
+      </button>
       <div class="flex items-center gap-1 text-xs text-gray-500">
         <p>@<?= strtolower(htmlspecialchars($post['username'])); ?></p>
         <span class="text-[10px]">•</span>
@@ -29,9 +29,7 @@
       </div>
     </div>
     <div class="flex-grow"></div>
-    <button class="text-mainText hover:bg-blue-500/10 hover:text-blue-500 p-2 rounded-full transition-colors">
-      <ion-icon name="ellipsis-horizontal"></ion-icon>
-    </button>
+    <?php require __DIR__ . '/FollowButton.php'; ?>
   </div>
 
   <p class="text-mainText text-[15px] mb-3 leading-relaxed whitespace-pre-line ">

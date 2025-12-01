@@ -10,25 +10,20 @@ class GroupController
 {
     public function renderDetail()
     {
-        // 1. Ambil ID User Login
         if (session_status() == PHP_SESSION_NONE) session_start();
         $myId = $_SESSION['login']['id_user'] ?? 0;
         
         $groupId = $_GET['id'] ?? 1;
 
-        // 2. CEK STATUS MEMBER (LOGIKA BARU)
-        // Jika user bukan member, kita kosongkan $groupInfo agar View menampilkan "Belum Tergabung"
         $isMember = false;
         if ($myId != 0) {
             $isMember = GroupModel::isMember($groupId, $myId);
         }
 
-        // Default data kosong
         $groupInfo = [];
         $formattedPosts = [];
         $formattedMembers = [];
 
-        // HANYA AMBIL DATA JIKA DIA ADALAH MEMBER
         if ($isMember) {
             $groupDB = GroupModel::getGroupById($groupId);
             
@@ -46,10 +41,8 @@ class GroupController
                     'icon' => $groupDB['group_pict'] ? '/assets/' . $groupDB['group_pict'] : 'https://i.pinimg.com/1200x/aa/17/59/aa1759de4f9a01bb4f7966133d78c758.jpg'
                 ];
 
-                // Ambil Postingan
                 $postsDB = GroupModel::getPostsByGroupId($groupId);
                 foreach ($postsDB as $p) {
-                    // ... (Logika mapping media type sama seperti sebelumnya) ...
                     $mediaType = 'text';
                     $mediaUrl = null;
                     if (!empty($p['foto_img_url'])) {
@@ -71,7 +64,6 @@ class GroupController
                     ];
                 }
 
-                // Ambil Member
                 foreach($membersDB as $m) {
                     $formattedMembers[] = [
                         'id' => $m['id'],
@@ -82,8 +74,6 @@ class GroupController
                 }
             }
         } 
-        // JIKA BUKAN MEMBER, $groupInfo TETAP KOSONG []
-        // Ini akan memicu tampilan "Belum Tergabung" di View.
 
         $model = [
             'title' => 'Grup',
@@ -91,7 +81,8 @@ class GroupController
             'current_user_id' => $myId,
             'group' => $groupInfo, 
             'posts' => $formattedPosts,
-            'members' => $formattedMembers
+            'members' => $formattedMembers,
+            "hideSidebar" => false
         ];
 
         View::render("/group/group_display", $model);
@@ -108,7 +99,6 @@ class GroupController
 
         foreach($groupsDB as $g) {
             
-            // LOGIKA BARU: Cek apakah sudah join?
             $isJoined = false;
             if ($myId != 0) {
                 $isJoined = GroupModel::isMember($g['id_group'], $myId);
@@ -128,7 +118,6 @@ class GroupController
         
         foreach($usersDB as $u) {
             
-            // LOGIKA BARU: Cek status follow untuk setiap user
             $isFollowed = false;
             if ($myId != 0) {
                 $isFollowed = UserModel::isFollowing($myId, $u['id']);
@@ -148,11 +137,28 @@ class GroupController
             'title' => 'Temukan',
             'menus' => [['text' => 'Temukan', 'url' => '#', 'active' => true]],
             'groups' => $formattedGroups,
-            'users' => $formattedUsers 
+            'users' => $formattedUsers ,
+            'hideSidebar'=> false
         ];
 
         View::render("/group/explore", $model);
     }
+
+    public function explore() {
+        $chars = $_POST["explore"];
+        $users = UserModel::getExploreUser($chars);
+        // $groups = GroupModel::getExploreGroup($chars);
+
+        $model = [
+            'title' => 'Temukan',
+            'menus' => [['text' => 'Temukan', 'url' => '#', 'active' => true]],
+            'users_explore' => $users,
+            'hideSidebar'=> false
+            ];
+
+        View::render("/group/explore", $model);
+    }
+    
     public function join()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -163,21 +169,18 @@ class GroupController
 
             if ($userId != 0 && $groupId != 0) {
                 try {
-                    // Insert ke DB
                     $sql = "INSERT INTO group_member (member_group_id, member_user_id) VALUES (?, ?)";
                     $stmt = GroupModel::conn()->prepare($sql);
                     $stmt->execute([$groupId, $userId]);
 
-                    // Return JSON Sukses
                     echo json_encode(['status' => 'success', 'message' => 'Berhasil gabung']);
                 } catch (\Exception $e) {
-                    // Biasanya error karena duplikat (sudah join)
                     echo json_encode(['status' => 'error', 'message' => 'Gagal gabung']);
                 }
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
             }
-            exit; // Stop agar tidak render view
+            exit;
         }
     }
 
@@ -192,7 +195,7 @@ class GroupController
                 GroupModel::leaveGroup($groupId, $userId);
             }
 
-            header("Location: /group/group_display?id=" . $groupId);
+            header("Location: /group?id=" . $groupId);
             exit;
         }
     }
@@ -206,22 +209,16 @@ class GroupController
             
             $groupId = $_POST['group_id'] ?? 0;
             $targetUserId = $_POST['member_id'] ?? 0;
-
-            // 1. Validasi: Ambil data grup untuk cek siapa ownernya
             $groupDB = GroupModel::getGroupById($groupId);
 
-            // 2. Keamanan: Pastikan yang melakukan request ADALAH OWNER GRUP
             if ($groupDB && $groupDB['group_owner_user_id'] == $currentUserId) {
                 
-                // 3. Jangan biarkan owner menendang dirinya sendiri
                 if ($targetUserId != $currentUserId) {
-                    // Kita bisa pakai fungsi leaveGroup karena logikanya sama (hapus baris di db)
                     GroupModel::leaveGroup($groupId, $targetUserId);
                 }
             }
 
-            // Redirect kembali
-            header("Location: /group/group_display?id=" . $groupId);
+            header("Location: /group?id=" . $groupId);
             exit;
         }
     }

@@ -1,17 +1,18 @@
-<?php 
-if(isset($_SESSION['login']['id_user'])){
-    $userId = $_SESSION['login']['id_user'];
+<?php
+if(isset($_SESSION['login']['id_user'])) {
+  $userId = $_SESSION['login']['id_user'];
 } else {
-    $userId = 0;
+  $userId = 0;
 }
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$isHomeActive = ($currentPath === '/' || $currentPath === '/index.php'); // Check if it's the home path
+$isHomeActive = ($currentPath === '/' || $currentPath === '/index.php');
 
-function getIconName($path, $name, $currentPath) {
-    $isActive = (strpos($currentPath, $path) === 0 && $path !== '/') || ($path === '/' && ($currentPath === '/' || $currentPath === '/index.php'));
-    
-    return $isActive ? $name : $name . '-outline';
+function getIconName($path, $name, $currentPath)
+{
+  $isActive = (strpos($currentPath, $path) === 0 && $path !== '/') || ($path === '/' && ($currentPath === '/' || $currentPath === '/index.php'));
+
+  return $isActive ? $name : $name . '-outline';
 }
 
 ?>
@@ -35,19 +36,20 @@ function getIconName($path, $name, $currentPath) {
       </ion-icon>
     </a>
 
-    <a href="/grup" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="/group" id="nav-grup" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/grup', 'people', $currentPath); ?>"
+
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
-    <a href="/search" id="nav-search" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="/explore" id="nav-search" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/search', 'search', $currentPath); ?>"
         class="text-3xl text-mainGray group-hover:text-mainText transition-colors">
       </ion-icon>
     </a>
 
-    <a href="/create" id="nav-add" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
+    <a href="/upload" id="nav-add" class="sidebar-icon group p-3 duration-300 transition-colors outline-none">
       <ion-icon name="<?= getIconName('/create', 'add-circle', $currentPath); ?>"
         class="text-[2.1rem] text-mainGray group-hover:text-mainText transition-colors"></ion-icon>
     </a>
@@ -86,37 +88,37 @@ function getIconName($path, $name, $currentPath) {
 </nav>
 
 <script>
-function toggleMenu() {
-  const popup = document.getElementById('menuPopup');
+  function toggleMenu() {
+    const popup = document.getElementById('menuPopup');
 
-  if (!popup) {
-    console.error("Element #menuPopup tidak ditemukan! Cek path require_once PHP nya.");
-    return;
-  }
+    if (!popup) {
+      console.error("Element #menuPopup tidak ditemukan! Cek path require_once PHP nya.");
+      return;
+    }
 
-  if (popup.classList.contains('hidden')) {
-    popup.classList.remove('hidden');
-    setTimeout(() => {
-      popup.classList.remove('opacity-0', 'scale-95', 'translate-y-2');
-      popup.classList.add('opacity-100', 'scale-100', 'translate-y-0');
-    }, 10);
-  } else {
-    popup.classList.add('opacity-0', 'scale-95', 'translate-y-2');
-    popup.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
-    setTimeout(() => {
-      popup.classList.add('hidden');
-    }, 200);
-  }
-}
-
-window.addEventListener('click', function(e) {
-  const popup = document.getElementById('menuPopup');
-  const trigger = document.getElementById('menuTrigger');
-
-  if (popup && trigger && !trigger.contains(e.target) && !popup.contains(e.target)) {
-    if (!popup.classList.contains('hidden')) {
-      toggleMenu();
+    if (popup.classList.contains('hidden')) {
+      popup.classList.remove('hidden');
+      setTimeout(() => {
+        popup.classList.remove('opacity-0', 'scale-95', 'translate-y-2');
+        popup.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+      }, 10);
+    } else {
+      popup.classList.add('opacity-0', 'scale-95', 'translate-y-2');
+      popup.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+      setTimeout(() => {
+        popup.classList.add('hidden');
+      }, 200);
     }
   }
-});
+
+  window.addEventListener('click', function (e) {
+    const popup = document.getElementById('menuPopup');
+    const trigger = document.getElementById('menuTrigger');
+
+    if (popup && trigger && !trigger.contains(e.target) && !popup.contains(e.target)) {
+      if (!popup.classList.contains('hidden')) {
+        toggleMenu();
+      }
+    }
+  });
 </script>
