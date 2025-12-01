@@ -7,6 +7,11 @@
   <form action="/store" method="POST" enctype="multipart/form-data" class="space-y-6">
 
     <div class="relative w-full">
+      <?php if (isset($_SESSION['err_msg'])): ?>
+        <?= $_SESSION['err_msg'] ?>
+        <?php unset($_SESSION['err_msg']) ?>
+      <?php endif; ?>
+
       <label class="block text-sm font-medium text-mainGray mb-2">Media</label>
 
       <div id="drop-area"

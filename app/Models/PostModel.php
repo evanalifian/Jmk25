@@ -2,8 +2,10 @@
 
 namespace Jmk25\Models;
 
+use Carbon\Carbon;
 use Jmk25\Config\Database;
 use PDO;
+use PDOException;
 
 class PostModel {
   
@@ -38,4 +40,36 @@ class PostModel {
     return $statement->fetchAll(PDO::FETCH_ASSOC);
   }
 
+    public static function storeFotoMeta($upload_id, $img_url, $foto_alt_text) {
+        $sql = "INSERT INTO content_foto (id_upload, foto_img_url, foto_alt_text)
+                VALUES (?, ?, ?)";
+        
+        $statement = self::conn()->prepare($sql);
+        
+        $statement->execute([$upload_id, $img_url, $foto_alt_text]);
+    }
+
+    public static function upload($user_id, $category_id, $caption, $img_path) {
+        try {
+            $created_at = Carbon::now(); 
+
+            $sql = "INSERT INTO upload (upload_user_id, upload_category_id, upload_caption, upload_created_at) 
+                    VALUES (?, ?, ?, ?)";
+
+            $pdo = self::conn(); 
+            $statement = $pdo->prepare($sql);
+            
+            $statement->execute([$user_id, $category_id, $caption, $created_at]);
+
+            $new_upload_id = $pdo->lastInsertId();
+
+            $statement->closeCursor();
+
+            return self::storeFotoMeta($new_upload_id, $img_path, $caption);
+
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }

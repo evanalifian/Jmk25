@@ -77,7 +77,7 @@
 
           <?php if ($postUser): ?>
 
-          <?php foreach ($model["data"] as $post): ?>
+          <?php foreach ($model["dataPost"] as $post): ?>
 
           <?php require __DIR__ . '/../../partials/ContentCard.php'; ?>
 
